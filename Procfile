@@ -1,1 +1,1 @@
-web: python scripts/start_web_server.py 
+web: python wsgi.py 

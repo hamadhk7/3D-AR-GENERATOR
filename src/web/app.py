@@ -143,12 +143,13 @@ def run_app(host: str = "localhost", port: int = 5000, debug: bool = False):
     # Create the Flask app
     app = create_app()
     
-    # For Railway deployment, bind to all interfaces (0.0.0.0)
-    # For local development, use localhost
+    # For Railway deployment, use production settings
     if os.environ.get("PORT"):  # If PORT is set, we're in Railway
         host = "0.0.0.0"
+        debug = False  # Disable debug mode in production
     else:
         host = "localhost"
+        debug = True   # Enable debug mode for local development
     
     app.run(
         host=host,
