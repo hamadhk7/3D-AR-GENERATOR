@@ -1,0 +1,1299 @@
+{% extends "base.html" %}
+{% block title %}3D Model Viewer - {{ model_id }}{% endblock %}
+
+{% block extra_css %}
+<style>
+    .model-viewer-container {
+        height: 60vh;
+        border: 2px solid #e9ecef;
+        border-radius: 8px;
+        margin: 20px 0;
+        position: relative;
+        background: #f8f9fa;
+        overflow: hidden;
+        z-index: 1;
+    }
+    
+    .model-info {
+        background: white;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        position: relative;
+        z-index: 2;
+    }
+    
+    .model-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 15px;
+    }
+    
+    .loading-spinner {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        font-size: 18px;
+        color: #6c757d;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(248, 249, 250, 0.9);
+        z-index: 10;
+    }
+    
+    .loading-progress {
+        width: 300px;
+        max-width: 80%;
+        margin-top: 20px;
+    }
+    
+    .progress-bar {
+        width: 100%;
+        height: 20px;
+        background-color: #e9ecef;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 10px;
+    }
+    
+    .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #007bff, #0056b3);
+        border-radius: 10px;
+        transition: width 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 12px;
+        font-weight: bold;
+    }
+    
+    .error-message {
+        color: #dc3545;
+        text-align: center;
+        padding: 20px;
+    }
+    
+    .controls-section {
+        margin-top: 20px;
+        position: relative;
+        z-index: 2;
+    }
+    
+    .info-section {
+        margin-top: 20px;
+        position: relative;
+        z-index: 2;
+    }
+    
+    /* Ensure proper spacing between sections */
+    .row {
+        margin-bottom: 20px;
+    }
+    
+    .card {
+        margin-bottom: 15px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    /* Fix for Three.js canvas */
+    .model-viewer-container canvas {
+        display: block;
+        width: 100% !important;
+        height: 100% !important;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .model-viewer-container {
+            height: 50vh;
+        }
+        
+        .model-actions {
+            flex-direction: column;
+        }
+        
+        .model-actions .btn {
+            width: 100%;
+            margin-bottom: 5px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Home</a></li>
+                    <li class="breadcrumb-item active">Model Viewer</li>
+                </ol>
+            </nav>
+            
+            <div class="model-info">
+                <h2>3D Model Viewer</h2>
+                <p class="text-muted">Model ID: {{ model_id }}</p>
+                
+                <div class="model-actions">
+                    <button class="btn btn-primary" onclick="downloadModel()">
+                        <i class="fas fa-download"></i> Download
+                    </button>
+                    <button class="btn btn-success" onclick="viewInAR()">
+                        <i class="fas fa-vr-cardboard"></i> View in AR
+                    </button>
+                    <button class="btn btn-info" onclick="shareModel()">
+                        <i class="fas fa-share"></i> Share
+                    </button>
+                    <button class="btn btn-secondary" onclick="goBack()">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                </div>
+            </div>
+            
+            <div class="model-viewer-container" id="modelViewer">
+                <div class="loading-spinner" id="loadingSpinner">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <span class="ms-3">Loading 3D model...</span>
+                    <div class="loading-progress">
+                        <div class="progress-bar">
+                            <div id="progressFill" class="progress-fill" style="width: 0%">0%</div>
+                        </div>
+                        <div id="progressText" class="text-center">Initializing...</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card info-section">
+                        <div class="card-header">
+                            <h5>Model Information</h5>
+                        </div>
+                        <div class="card-body" id="modelInfo">
+                            <p class="text-muted">Loading model information...</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="card controls-section">
+                        <div class="card-header">
+                            <h5>Controls</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label class="form-label">Camera Controls</label>
+                                <div class="btn-group w-100" role="group">
+                                    <button class="btn btn-outline-secondary" onclick="resetCamera()">Reset</button>
+                                    <button class="btn btn-outline-secondary" onclick="toggleAutoRotate()">Auto Rotate</button>
+                                    <button class="btn btn-outline-secondary" onclick="toggleWireframe()">Wireframe</button>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Lighting</label>
+                                <div class="btn-group w-100" role="group">
+                                    <button class="btn btn-outline-secondary" onclick="toggleLights()">Toggle Lights</button>
+                                    <button class="btn btn-outline-secondary" onclick="changeLighting('studio')">Studio</button>
+                                    <button class="btn btn-outline-secondary" onclick="changeLighting('outdoor')">Outdoor</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
+
+<script>
+let modelViewerScene, modelViewerCamera, modelViewerRenderer, modelViewerControls, modelViewerModel;
+let autoRotate = false;
+let wireframeMode = false;
+let lightsEnabled = true;
+
+// Initialize the 3D viewer
+function initViewer() {
+    const container = document.getElementById('modelViewer');
+    const width = container.clientWidth;
+    const height = container.clientHeight;
+    
+    // Create scene
+    modelViewerScene = new THREE.Scene();
+    modelViewerScene.background = new THREE.Color(0xf8f9fa);
+    
+    // Create camera
+    modelViewerCamera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+    modelViewerCamera.position.set(0, 0, 5);
+    
+    // Create renderer
+    modelViewerRenderer = new THREE.WebGLRenderer({ antialias: true });
+    modelViewerRenderer.setSize(width, height);
+    modelViewerRenderer.shadowMap.enabled = true;
+    modelViewerRenderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    
+    // Add renderer to container
+    container.innerHTML = '';
+    container.appendChild(modelViewerRenderer.domElement);
+    
+    // Add controls
+    modelViewerControls = new THREE.OrbitControls(modelViewerCamera, modelViewerRenderer.domElement);
+    modelViewerControls.enableDamping = true;
+    modelViewerControls.dampingFactor = 0.05;
+    
+    // Add lights
+    addLights();
+    
+    // Load the model
+    loadModel();
+    
+    // Start animation loop
+    animate();
+}
+
+// Add lighting to the scene
+function addLights() {
+    // Ambient light
+    const ambientLight = new THREE.AmbientLight(0x404040, 0.6);
+    modelViewerScene.add(ambientLight);
+    
+    // Directional light
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+    directionalLight.position.set(10, 10, 5);
+    directionalLight.castShadow = true;
+    directionalLight.shadow.mapSize.width = 2048;
+    directionalLight.shadow.mapSize.height = 2048;
+    modelViewerScene.add(directionalLight);
+    
+    // Point light
+    const pointLight = new THREE.PointLight(0xffffff, 0.5);
+    pointLight.position.set(-10, 10, -5);
+    modelViewerScene.add(pointLight);
+}
+
+// Load the actual 3D model from the API
+function loadModel() {
+    const modelId = '{{ model_id }}';
+    console.log('Loading model with ID:', modelId);
+    
+    // First, get the model information
+    fetch(`/api/models/${modelId}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success && data.model) {
+                const model = data.model;
+                console.log('Model data:', model);
+                console.log('Model prompt:', model.prompt);
+                
+                // Check if this is a real Tripo-generated model
+                if (modelId.startsWith('tripo_') && (model.output && model.output.pbr_model || model.download_url)) {
+                    console.log('Loading real GLB model from local download endpoint');
+                    console.log('Model data:', model);
+                    console.log('Model output:', model.output);
+                    // Load the actual GLB file from our local download endpoint to avoid CORS issues
+                    const downloadUrl = `/api/models/${modelId}/download`;
+                    console.log('Download URL:', downloadUrl);
+                    loadGLBModel(downloadUrl);
+                } else {
+                    console.log('Creating dynamic 3D model for prompt:', model.prompt);
+                    // Create a dynamic 3D model based on the prompt
+                    createPlaceholderModel(model.prompt);
+                }
+                
+                // Update model info
+                updateModelInfo(model);
+            } else {
+                throw new Error('Model not found');
+            }
+        })
+        .catch(error => {
+            console.error('Error loading model:', error);
+            showError('Failed to load model. Please try again.');
+        });
+}
+
+// Load GLB model from URL
+function loadGLBModel(modelUrl) {
+    console.log('Loading GLB model from URL:', modelUrl);
+    
+    // First, test if the URL is accessible
+    updateLoadingProgress(5);
+    fetch(modelUrl, { method: 'HEAD' })
+        .then(response => {
+            console.log('GLB file accessibility test:', response.status, response.statusText);
+            console.log('Content-Type:', response.headers.get('Content-Type'));
+            console.log('Content-Length:', response.headers.get('Content-Length'));
+            
+            if (response.ok) {
+                console.log('✅ GLB file is accessible, proceeding with load...');
+                updateLoadingProgress(15);
+                // Load the actual GLB file
+                const loader = new THREE.GLTFLoader();
+                
+                loader.load(
+                    modelUrl,
+                    function (gltf) {
+                        // Success callback
+                        console.log('GLB model loaded successfully!');
+                        updateLoadingProgress(100);
+                        modelViewerModel = gltf.scene;
+                        
+                        // Enable shadows
+                        modelViewerModel.traverse(function (child) {
+                            if (child.isMesh) {
+                                child.castShadow = true;
+                                child.receiveShadow = true;
+                            }
+                        });
+                        
+                        modelViewerScene.add(modelViewerModel);
+                        
+                        // Center and scale the model
+                        centerAndScaleModel();
+                        
+                        // Hide loading spinner
+                        hideLoadingSpinner();
+                    },
+                    function (xhr) {
+                        // Progress callback
+                        const progress = (xhr.loaded / xhr.total) * 100;
+                        // Scale progress from 15% to 95% (since we start at 15% after accessibility test)
+                        const scaledProgress = 15 + (progress * 0.8);
+                        console.log(`Loading progress: ${Math.round(progress)}% (scaled: ${Math.round(scaledProgress)}%)`);
+                        updateLoadingProgress(scaledProgress);
+                    },
+                    function (error) {
+                        // Error callback
+                        console.error('Error loading GLB:', error);
+                        console.log('Attempting to create dynamic 3D model as fallback...');
+                        showError('Failed to load 3D model file. Using dynamic preview instead.');
+                        createPlaceholderModel('3D Model');
+                    }
+                );
+            } else {
+                console.error('❌ GLB file is not accessible:', response.status, response.statusText);
+                showError('GLB file is not accessible. Using dynamic preview instead.');
+                createPlaceholderModel('3D Model');
+            }
+        })
+        .catch(error => {
+            console.error('❌ Error testing GLB file accessibility:', error);
+            showError('Error accessing GLB file. Using dynamic preview instead.');
+            createPlaceholderModel('3D Model');
+        });
+}
+
+// Create a dynamic 3D model generator for any prompt
+function createPlaceholderModel(prompt) {
+    console.log('Creating dynamic 3D model for prompt:', prompt);
+    const promptLower = prompt.toLowerCase();
+    console.log('Analyzing prompt:', promptLower);
+    
+    // Analyze the prompt to determine object type and properties
+    const analysis = analyzePrompt(promptLower);
+    console.log('Prompt analysis:', analysis);
+    
+    // Generate a realistic 3D model based on the analysis
+    modelViewerModel = generateRealisticModel(analysis);
+    
+    modelViewerModel.castShadow = true;
+    modelViewerModel.receiveShadow = true;
+    modelViewerScene.add(modelViewerModel);
+    
+    // Center and scale the model
+    centerAndScaleModel();
+    
+    // Hide loading spinner
+    hideLoadingSpinner();
+}
+
+// Analyze any prompt to determine object properties
+function analyzePrompt(prompt) {
+    const analysis = {
+        objectType: 'object',
+        shape: 'complex',
+        material: 'standard',
+        color: 0x4CAF50,
+        size: 'medium',
+        details: [],
+        metallic: false,
+        transparent: false,
+        reflective: false
+    };
+    
+    // Detect object types
+    if (prompt.includes('cup') || prompt.includes('mug') || prompt.includes('glass') || prompt.includes('bottle')) {
+        analysis.objectType = 'container';
+        analysis.shape = 'cylinder';
+        if (prompt.includes('coffee') || prompt.includes('tea')) {
+            analysis.color = 0x8B4513;
+            analysis.details.push('liquid');
+        }
+    } else if (prompt.includes('motorcycle') || prompt.includes('bike') || prompt.includes('scooter')) {
+        analysis.objectType = 'motorcycle';
+        analysis.shape = 'complex';
+        analysis.color = 0xC0C0C0; // Default silver
+        analysis.details.push('wheels', 'engine', 'seat', 'handlebars');
+        if (prompt.includes('leather')) {
+            analysis.details.push('leather_seat');
+        }
+    } else if (prompt.includes('car') || prompt.includes('vehicle') || prompt.includes('truck') || prompt.includes('bus') || prompt.includes('sports')) {
+        analysis.objectType = 'vehicle';
+        analysis.shape = 'complex';
+        analysis.color = 0xcc0000;
+        analysis.details.push('wheels', 'body', 'windows');
+        if (prompt.includes('sports')) {
+            analysis.details.push('sports');
+        }
+    } else if (prompt.includes('airplane') || prompt.includes('plane') || prompt.includes('jet')) {
+        analysis.objectType = 'aircraft';
+        analysis.shape = 'complex';
+        analysis.color = 0xffffff;
+        analysis.details.push('wings', 'fuselage', 'engines');
+    } else if (prompt.includes('boat') || prompt.includes('ship') || prompt.includes('yacht')) {
+        analysis.objectType = 'watercraft';
+        analysis.shape = 'complex';
+        analysis.color = 0x0000ff;
+        analysis.details.push('hull', 'deck', 'cabin');
+    } else if (prompt.includes('chair') || prompt.includes('table') || prompt.includes('furniture') || prompt.includes('sofa')) {
+        analysis.objectType = 'furniture';
+        analysis.shape = 'geometric';
+        analysis.color = 0x8B4513;
+        analysis.details.push('legs', 'surface');
+    } else if (prompt.includes('robot') || prompt.includes('android') || prompt.includes('cyborg')) {
+        analysis.objectType = 'humanoid';
+        analysis.shape = 'complex';
+        analysis.color = 0xcccccc;
+        analysis.details.push('head', 'body', 'arms', 'legs');
+    } else if (prompt.includes('animal') || prompt.includes('cat') || prompt.includes('dog') || prompt.includes('bird')) {
+        analysis.objectType = 'animal';
+        analysis.shape = 'organic';
+        analysis.color = 0x8B4513;
+        analysis.details.push('head', 'body', 'legs', 'tail');
+    } else if (prompt.includes('building') || prompt.includes('house') || prompt.includes('skyscraper')) {
+        analysis.objectType = 'building';
+        analysis.shape = 'geometric';
+        analysis.color = 0xcccccc;
+        analysis.details.push('walls', 'roof', 'windows');
+    } else if (prompt.includes('tree') || prompt.includes('plant') || prompt.includes('flower')) {
+        analysis.objectType = 'plant';
+        analysis.shape = 'organic';
+        analysis.color = 0x228B22;
+        analysis.details.push('trunk', 'leaves', 'branches');
+    }
+    
+    // Detect materials
+    if (prompt.includes('metallic') || prompt.includes('metal') || prompt.includes('steel') || prompt.includes('silver')) {
+        analysis.material = 'metallic';
+        analysis.metallic = true;
+        analysis.reflective = true;
+        analysis.color = 0xC0C0C0;
+    } else if (prompt.includes('glass') || prompt.includes('transparent') || prompt.includes('clear')) {
+        analysis.material = 'glass';
+        analysis.transparent = true;
+        analysis.color = 0x87CEEB;
+    } else if (prompt.includes('wood') || prompt.includes('wooden')) {
+        analysis.material = 'wood';
+        analysis.color = 0x8B4513;
+    } else if (prompt.includes('plastic')) {
+        analysis.material = 'plastic';
+        analysis.color = 0x4169E1;
+    }
+    
+    // Detect colors
+    if (prompt.includes('red')) analysis.color = 0xff0000;
+    else if (prompt.includes('blue')) analysis.color = 0x0000ff;
+    else if (prompt.includes('green')) analysis.color = 0x00ff00;
+    else if (prompt.includes('yellow')) analysis.color = 0xffff00;
+    else if (prompt.includes('purple')) analysis.color = 0x800080;
+    else if (prompt.includes('orange')) analysis.color = 0xffa500;
+    else if (prompt.includes('pink')) analysis.color = 0xffc0cb;
+    else if (prompt.includes('black')) analysis.color = 0x000000;
+    else if (prompt.includes('white')) analysis.color = 0xffffff;
+    else if (prompt.includes('brown')) analysis.color = 0x8B4513;
+    else if (prompt.includes('gold')) analysis.color = 0xFFD700;
+    
+    // Detect size
+    if (prompt.includes('large') || prompt.includes('big') || prompt.includes('huge')) {
+        analysis.size = 'large';
+    } else if (prompt.includes('small') || prompt.includes('tiny') || prompt.includes('mini')) {
+        analysis.size = 'small';
+    }
+    
+    return analysis;
+}
+
+// Generate realistic 3D model based on analysis
+function generateRealisticModel(analysis) {
+    const group = new THREE.Group();
+    
+    switch (analysis.objectType) {
+        case 'container':
+            return generateContainer(analysis);
+        case 'vehicle':
+            return generateVehicle(analysis);
+        case 'motorcycle':
+            return generateMotorcycle(analysis);
+        case 'furniture':
+            return generateFurniture(analysis);
+        case 'humanoid':
+            return generateHumanoid(analysis);
+        case 'animal':
+            return generateAnimal(analysis);
+        case 'building':
+            return generateBuilding(analysis);
+        case 'plant':
+            return generatePlant(analysis);
+        default:
+            return generateGenericObject(analysis);
+    }
+}
+
+// Generate container objects (cups, bottles, etc.)
+function generateContainer(analysis) {
+    const group = new THREE.Group();
+    
+    // Main container body
+    const bodyGeometry = new THREE.CylinderGeometry(0.8, 0.6, 1.2, 16);
+    const bodyMaterial = new THREE.MeshPhongMaterial({
+        color: analysis.color,
+        metalness: analysis.metallic ? 0.9 : 0.1,
+        roughness: analysis.metallic ? 0.1 : 0.8,
+        transparent: analysis.transparent,
+        opacity: analysis.transparent ? 0.7 : 1.0
+    });
+    const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
+    body.position.y = 0.6;
+    group.add(body);
+    
+    // Handle for cups/mugs
+    if (analysis.details.includes('liquid') || analysis.objectType === 'container') {
+        const handleGeometry = new THREE.TorusGeometry(0.3, 0.1, 8, 16);
+                const handleMaterial = new THREE.MeshPhongMaterial({ 
+            color: analysis.color,
+            metalness: analysis.metallic ? 0.9 : 0.1,
+            roughness: analysis.metallic ? 0.1 : 0.8
+        });
+        const handle = new THREE.Mesh(handleGeometry, handleMaterial);
+        handle.position.set(0.8, 0.6, 0);
+        handle.rotation.z = Math.PI / 2;
+        group.add(handle);
+        
+        // Liquid inside
+        const liquidGeometry = new THREE.CylinderGeometry(0.75, 0.55, 1.1, 16);
+        const liquidMaterial = new THREE.MeshPhongMaterial({
+            color: 0x4A2C2A,
+            transparent: true,
+            opacity: 0.8
+        });
+        const liquid = new THREE.Mesh(liquidGeometry, liquidMaterial);
+        liquid.position.y = 0.55;
+        group.add(liquid);
+    }
+    
+    return group;
+}
+
+// Generate vehicle objects
+function generateVehicle(analysis) {
+    const group = new THREE.Group();
+    
+    // Car body
+    const bodyGeometry = new THREE.BoxGeometry(3, 0.8, 2);
+    const bodyMaterial = new THREE.MeshPhongMaterial({
+        color: analysis.color,
+        metalness: analysis.metallic ? 0.9 : 0.8,
+        roughness: analysis.metallic ? 0.1 : 0.2
+    });
+    const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
+    body.position.y = 0.4;
+    group.add(body);
+    
+    // Car roof
+    const roofGeometry = new THREE.BoxGeometry(2, 0.6, 1.8);
+    const roofMaterial = new THREE.MeshPhongMaterial({
+        color: analysis.color,
+        metalness: analysis.metallic ? 0.9 : 0.8,
+        roughness: analysis.metallic ? 0.1 : 0.2
+    });
+    const roof = new THREE.Mesh(roofGeometry, roofMaterial);
+    roof.position.set(0, 1.1, 0);
+    group.add(roof);
+    
+    // Windows
+    const windowGeometry = new THREE.BoxGeometry(0.1, 0.8, 1.8);
+    const windowMaterial = new THREE.MeshPhongMaterial({
+        color: 0x87CEEB,
+        transparent: true,
+        opacity: 0.7
+    });
+    const frontWindow = new THREE.Mesh(windowGeometry, windowMaterial);
+    frontWindow.position.set(1.4, 1.2, 0);
+    group.add(frontWindow);
+    
+    const rearWindow = new THREE.Mesh(windowGeometry, windowMaterial);
+    rearWindow.position.set(-1.4, 1.2, 0);
+    group.add(rearWindow);
+    
+    // Wheels
+    const wheelGeometry = new THREE.CylinderGeometry(0.4, 0.4, 0.2, 16);
+    const wheelMaterial = new THREE.MeshPhongMaterial({
+        color: 0x333333,
+                    metalness: 0.9,
+                    roughness: 0.1
+                });
+                
+    const wheelPositions = [
+        [1.2, 0.4, 0.8], [1.2, 0.4, -0.8],
+        [-1.2, 0.4, 0.8], [-1.2, 0.4, -0.8]
+    ];
+    
+    wheelPositions.forEach(pos => {
+        const wheel = new THREE.Mesh(wheelGeometry, wheelMaterial);
+        wheel.rotation.z = Math.PI / 2;
+        wheel.position.set(...pos);
+        group.add(wheel);
+    });
+    
+    return group;
+}
+
+// Generate furniture objects
+function generateFurniture(analysis) {
+    const group = new THREE.Group();
+    
+    // Main surface
+    const surfaceGeometry = new THREE.BoxGeometry(1.5, 0.2, 1.5);
+    const surfaceMaterial = new THREE.MeshPhongMaterial({
+        color: analysis.color,
+        metalness: analysis.metallic ? 0.9 : 0.1,
+        roughness: analysis.metallic ? 0.1 : 0.8
+    });
+    const surface = new THREE.Mesh(surfaceGeometry, surfaceMaterial);
+    surface.position.y = 0.1;
+    group.add(surface);
+    
+    // Back support (for chairs)
+    if (analysis.details.includes('legs')) {
+        const backGeometry = new THREE.BoxGeometry(0.1, 1.5, 1.5);
+        const backMaterial = new THREE.MeshPhongMaterial({
+            color: analysis.color,
+            metalness: analysis.metallic ? 0.9 : 0.1,
+            roughness: analysis.metallic ? 0.1 : 0.8
+        });
+        const back = new THREE.Mesh(backGeometry, backMaterial);
+        back.position.set(0.7, 0.85, 0);
+        group.add(back);
+    }
+    
+    // Legs
+    const legGeometry = new THREE.BoxGeometry(0.1, 0.8, 0.1);
+    const legMaterial = new THREE.MeshPhongMaterial({
+        color: analysis.color,
+        metalness: analysis.metallic ? 0.9 : 0.1,
+        roughness: analysis.metallic ? 0.1 : 0.8
+    });
+    
+    const legPositions = [
+        [0.6, -0.3, 0.6], [-0.6, -0.3, 0.6],
+        [0.6, -0.3, -0.6], [-0.6, -0.3, -0.6]
+    ];
+    
+    legPositions.forEach(pos => {
+        const leg = new THREE.Mesh(legGeometry, legMaterial);
+        leg.position.set(...pos);
+        group.add(leg);
+    });
+    
+    return group;
+}
+
+// Generate humanoid objects (robots, etc.)
+function generateHumanoid(analysis) {
+    const group = new THREE.Group();
+    
+    // Head
+                const headGeometry = new THREE.BoxGeometry(1.5, 1.5, 1.5);
+                const headMaterial = new THREE.MeshPhongMaterial({ 
+        color: analysis.color,
+        metalness: analysis.metallic ? 0.9 : 0.6,
+        roughness: analysis.metallic ? 0.1 : 0.4
+                });
+                const head = new THREE.Mesh(headGeometry, headMaterial);
+                head.position.y = 2;
+    group.add(head);
+                
+    // Body
+                const bodyGeometry = new THREE.BoxGeometry(2, 2.5, 1);
+                const bodyMaterial = new THREE.MeshPhongMaterial({ 
+        color: analysis.color,
+        metalness: analysis.metallic ? 0.9 : 0.7,
+        roughness: analysis.metallic ? 0.1 : 0.3
+                });
+                const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
+                body.position.y = 0.25;
+    group.add(body);
+                
+                // Arms
+                const armGeometry = new THREE.BoxGeometry(0.5, 2, 0.5);
+                const armMaterial = new THREE.MeshPhongMaterial({ 
+        color: analysis.color,
+        metalness: analysis.metallic ? 0.9 : 0.6,
+        roughness: analysis.metallic ? 0.1 : 0.4
+                });
+                
+                const leftArm = new THREE.Mesh(armGeometry, armMaterial);
+                leftArm.position.set(-1.5, 0.5, 0);
+    group.add(leftArm);
+                
+                const rightArm = new THREE.Mesh(armGeometry, armMaterial);
+                rightArm.position.set(1.5, 0.5, 0);
+    group.add(rightArm);
+    
+    // Legs
+    const legGeometry = new THREE.BoxGeometry(0.5, 2, 0.5);
+    const legMaterial = new THREE.MeshPhongMaterial({
+        color: analysis.color,
+        metalness: analysis.metallic ? 0.9 : 0.6,
+        roughness: analysis.metallic ? 0.1 : 0.4
+    });
+    
+    const leftLeg = new THREE.Mesh(legGeometry, legMaterial);
+    leftLeg.position.set(-0.5, -1, 0);
+    group.add(leftLeg);
+    
+    const rightLeg = new THREE.Mesh(legGeometry, legMaterial);
+    rightLeg.position.set(0.5, -1, 0);
+    group.add(rightLeg);
+    
+    return group;
+}
+
+// Generate animal objects
+function generateAnimal(analysis) {
+    const group = new THREE.Group();
+    
+    // Body
+    const bodyGeometry = new THREE.SphereGeometry(1, 16, 16);
+    const bodyMaterial = new THREE.MeshPhongMaterial({
+        color: analysis.color,
+        metalness: analysis.metallic ? 0.9 : 0.1,
+        roughness: analysis.metallic ? 0.1 : 0.8
+    });
+    const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
+    body.position.y = 1;
+    group.add(body);
+    
+    // Head
+    const headGeometry = new THREE.SphereGeometry(0.6, 16, 16);
+    const headMaterial = new THREE.MeshPhongMaterial({
+        color: analysis.color,
+        metalness: analysis.metallic ? 0.9 : 0.1,
+        roughness: analysis.metallic ? 0.1 : 0.8
+    });
+    const head = new THREE.Mesh(headGeometry, headMaterial);
+    head.position.set(1.2, 1.5, 0);
+    group.add(head);
+    
+    // Legs
+    const legGeometry = new THREE.CylinderGeometry(0.2, 0.2, 1, 8);
+    const legMaterial = new THREE.MeshPhongMaterial({
+        color: analysis.color,
+        metalness: analysis.metallic ? 0.9 : 0.1,
+        roughness: analysis.metallic ? 0.1 : 0.8
+    });
+    
+    const legPositions = [
+        [-0.5, 0.5, 0.5], [0.5, 0.5, 0.5],
+        [-0.5, 0.5, -0.5], [0.5, 0.5, -0.5]
+    ];
+    
+    legPositions.forEach(pos => {
+        const leg = new THREE.Mesh(legGeometry, legMaterial);
+        leg.position.set(...pos);
+        group.add(leg);
+    });
+    
+    return group;
+}
+
+// Generate building objects
+function generateBuilding(analysis) {
+    const group = new THREE.Group();
+    
+    // Main building
+    const buildingGeometry = new THREE.BoxGeometry(2, 3, 2);
+    const buildingMaterial = new THREE.MeshPhongMaterial({
+        color: analysis.color,
+        metalness: analysis.metallic ? 0.9 : 0.1,
+        roughness: analysis.metallic ? 0.1 : 0.8
+    });
+    const building = new THREE.Mesh(buildingGeometry, buildingMaterial);
+    building.position.y = 1.5;
+    group.add(building);
+    
+    // Roof
+    const roofGeometry = new THREE.ConeGeometry(1.5, 1, 4);
+    const roofMaterial = new THREE.MeshPhongMaterial({
+        color: 0x8B4513,
+        metalness: 0.1,
+        roughness: 0.8
+    });
+    const roof = new THREE.Mesh(roofGeometry, roofMaterial);
+    roof.position.y = 3.5;
+    group.add(roof);
+    
+    // Windows
+    const windowGeometry = new THREE.BoxGeometry(0.1, 0.5, 0.5);
+    const windowMaterial = new THREE.MeshPhongMaterial({
+        color: 0x87CEEB,
+                    transparent: true,
+        opacity: 0.7
+    });
+    
+    const windowPositions = [
+        [0.9, 1.5, 0], [-0.9, 1.5, 0],
+        [0, 1.5, 0.9], [0, 1.5, -0.9]
+    ];
+    
+    windowPositions.forEach(pos => {
+        const window = new THREE.Mesh(windowGeometry, windowMaterial);
+        window.position.set(...pos);
+        group.add(window);
+    });
+    
+    return group;
+}
+
+// Generate plant objects
+function generatePlant(analysis) {
+    const group = new THREE.Group();
+    
+    // Trunk
+    const trunkGeometry = new THREE.CylinderGeometry(0.2, 0.3, 2, 8);
+    const trunkMaterial = new THREE.MeshPhongMaterial({
+        color: 0x8B4513,
+        metalness: 0.1,
+        roughness: 0.8
+    });
+    const trunk = new THREE.Mesh(trunkGeometry, trunkMaterial);
+    trunk.position.y = 1;
+    group.add(trunk);
+    
+    // Leaves/Foliage
+    const leavesGeometry = new THREE.SphereGeometry(1.5, 16, 16);
+    const leavesMaterial = new THREE.MeshPhongMaterial({
+        color: analysis.color,
+        metalness: 0.1,
+        roughness: 0.8
+    });
+    const leaves = new THREE.Mesh(leavesGeometry, leavesMaterial);
+    leaves.position.y = 2.5;
+    group.add(leaves);
+    
+    return group;
+}
+
+// Generate motorcycle objects
+function generateMotorcycle(analysis) {
+    const group = new THREE.Group();
+    
+    // Main body/frame
+    const frameGeometry = new THREE.BoxGeometry(0.3, 1.2, 3);
+    const frameMaterial = new THREE.MeshPhongMaterial({
+        color: analysis.color,
+        metalness: analysis.metallic ? 0.9 : 0.8,
+        roughness: analysis.metallic ? 0.1 : 0.2
+    });
+    const frame = new THREE.Mesh(frameGeometry, frameMaterial);
+    frame.position.y = 0.6;
+    group.add(frame);
+    
+    // Engine block
+    const engineGeometry = new THREE.CylinderGeometry(0.4, 0.4, 0.8, 8);
+    const engineMaterial = new THREE.MeshPhongMaterial({
+        color: 0x333333,
+        metalness: 0.9,
+        roughness: 0.1
+    });
+    const engine = new THREE.Mesh(engineGeometry, engineMaterial);
+    engine.rotation.z = Math.PI / 2;
+    engine.position.set(0, 0.4, 0);
+    group.add(engine);
+    
+    // Fuel tank
+    const tankGeometry = new THREE.CylinderGeometry(0.3, 0.3, 1.5, 8);
+    const tankMaterial = new THREE.MeshPhongMaterial({
+        color: analysis.color,
+        metalness: analysis.metallic ? 0.9 : 0.8,
+        roughness: analysis.metallic ? 0.1 : 0.2
+    });
+    const tank = new THREE.Mesh(tankGeometry, tankMaterial);
+    tank.rotation.z = Math.PI / 2;
+    tank.position.set(0, 0.8, 0.5);
+    group.add(tank);
+    
+    // Handlebars
+    const handlebarGeometry = new THREE.CylinderGeometry(0.05, 0.05, 1.2, 8);
+    const handlebarMaterial = new THREE.MeshPhongMaterial({
+        color: analysis.color,
+        metalness: analysis.metallic ? 0.9 : 0.6,
+        roughness: analysis.metallic ? 0.1 : 0.4
+    });
+    const handlebar = new THREE.Mesh(handlebarGeometry, handlebarMaterial);
+    handlebar.position.set(0, 1.2, 1.8);
+    group.add(handlebar);
+    
+    // Seat - check if leather is specified
+    const seatColor = analysis.details.includes('leather_seat') ? 0x8B4513 : analysis.color;
+    const seatGeometry = new THREE.BoxGeometry(0.8, 0.2, 1.2);
+    const seatMaterial = new THREE.MeshPhongMaterial({
+        color: seatColor,
+        metalness: analysis.details.includes('leather_seat') ? 0.1 : (analysis.metallic ? 0.9 : 0.6),
+        roughness: analysis.details.includes('leather_seat') ? 0.8 : (analysis.metallic ? 0.1 : 0.4)
+    });
+    const seat = new THREE.Mesh(seatGeometry, seatMaterial);
+    seat.position.set(0, 0.7, 1.2);
+    group.add(seat);
+    
+    // Front wheel
+    const frontWheelGeometry = new THREE.CylinderGeometry(0.5, 0.5, 0.15, 16);
+    const wheelMaterial = new THREE.MeshPhongMaterial({
+        color: 0x333333,
+        metalness: 0.9,
+        roughness: 0.1
+    });
+    const frontWheel = new THREE.Mesh(frontWheelGeometry, wheelMaterial);
+    frontWheel.rotation.z = Math.PI / 2;
+    frontWheel.position.set(0, 0.5, 2.2);
+    group.add(frontWheel);
+    
+    // Rear wheel
+    const rearWheel = new THREE.Mesh(frontWheelGeometry, wheelMaterial);
+    rearWheel.rotation.z = Math.PI / 2;
+    rearWheel.position.set(0, 0.5, -0.8);
+    group.add(rearWheel);
+    
+    // Exhaust pipe
+    const exhaustGeometry = new THREE.CylinderGeometry(0.08, 0.08, 1.5, 8);
+    const exhaustMaterial = new THREE.MeshPhongMaterial({
+        color: 0x666666,
+        metalness: 0.9,
+        roughness: 0.1
+    });
+    const exhaust = new THREE.Mesh(exhaustGeometry, exhaustMaterial);
+    exhaust.rotation.z = Math.PI / 2;
+    exhaust.position.set(0.2, 0.3, -0.5);
+    group.add(exhaust);
+    
+    // Headlight
+    const headlightGeometry = new THREE.SphereGeometry(0.15, 8, 8);
+    const headlightMaterial = new THREE.MeshPhongMaterial({
+        color: 0xffffcc,
+        emissive: 0xffffcc,
+        emissiveIntensity: 0.3
+    });
+    const headlight = new THREE.Mesh(headlightGeometry, headlightMaterial);
+    headlight.position.set(0, 0.8, 2.5);
+    group.add(headlight);
+    
+    return group;
+}
+
+// Generate generic objects for unknown types
+function generateGenericObject(analysis) {
+    const group = new THREE.Group();
+    
+    // Create a complex geometric shape based on the analysis
+    let geometry;
+    
+    if (analysis.shape === 'cylinder') {
+        geometry = new THREE.CylinderGeometry(0.8, 0.8, 1.5, 16);
+    } else if (analysis.shape === 'sphere') {
+        geometry = new THREE.SphereGeometry(1, 16, 16);
+    } else if (analysis.shape === 'geometric') {
+        geometry = new THREE.BoxGeometry(1.5, 1.5, 1.5);
+    } else {
+        // Complex shape - combine multiple geometries
+        const baseGeometry = new THREE.BoxGeometry(1.2, 1.2, 1.2);
+        const baseMaterial = new THREE.MeshPhongMaterial({
+            color: analysis.color,
+            metalness: analysis.metallic ? 0.9 : 0.1,
+            roughness: analysis.metallic ? 0.1 : 0.8,
+            transparent: analysis.transparent,
+            opacity: analysis.transparent ? 0.7 : 1.0
+        });
+        const base = new THREE.Mesh(baseGeometry, baseMaterial);
+        group.add(base);
+        
+        // Add decorative elements
+        const sphereGeometry = new THREE.SphereGeometry(0.3, 8, 8);
+        const sphereMaterial = new THREE.MeshPhongMaterial({
+            color: analysis.color,
+            metalness: analysis.metallic ? 0.9 : 0.1,
+            roughness: analysis.metallic ? 0.1 : 0.8
+        });
+        
+        const sphere1 = new THREE.Mesh(sphereGeometry, sphereMaterial);
+        sphere1.position.set(0.8, 0.8, 0);
+        group.add(sphere1);
+        
+        const sphere2 = new THREE.Mesh(sphereGeometry, sphereMaterial);
+        sphere2.position.set(-0.8, 0.8, 0);
+        group.add(sphere2);
+        
+        return group;
+    }
+    
+            const material = new THREE.MeshPhongMaterial({ 
+        color: analysis.color,
+        metalness: analysis.metallic ? 0.9 : 0.1,
+        roughness: analysis.metallic ? 0.1 : 0.8,
+        transparent: analysis.transparent,
+        opacity: analysis.transparent ? 0.7 : 1.0
+    });
+    
+    const mesh = new THREE.Mesh(geometry, material);
+    group.add(mesh);
+    
+    return group;
+}
+
+// Center and scale the model appropriately
+function centerAndScaleModel() {
+    if (!modelViewerModel) return;
+    
+    // Calculate bounding box
+            const box = new THREE.Box3().setFromObject(modelViewerModel);
+            const center = box.getCenter(new THREE.Vector3());
+            const size = box.getSize(new THREE.Vector3());
+            
+    // Center the model
+    modelViewerModel.position.sub(center);
+    
+    // Scale the model to fit in view
+            const maxDim = Math.max(size.x, size.y, size.z);
+    const scale = 3 / maxDim; // Scale to fit in 3x3x3 box
+    modelViewerModel.scale.setScalar(scale);
+    
+    // Position camera
+            const fov = modelViewerCamera.fov * (Math.PI / 180);
+    let cameraZ = Math.abs(maxDim * scale / 2 / Math.tan(fov / 2));
+            
+            modelViewerCamera.position.z = cameraZ * 1.5;
+    modelViewerControls.target.set(0, 0, 0);
+            modelViewerControls.update();
+}
+
+// Update loading progress
+function updateLoadingProgress(progress) {
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
+    
+    if (progressFill && progressText) {
+        const roundedProgress = Math.round(progress);
+        progressFill.style.width = `${roundedProgress}%`;
+        progressFill.textContent = `${roundedProgress}%`;
+        
+        if (roundedProgress < 10) {
+            progressText.textContent = 'Initializing...';
+        } else if (roundedProgress < 50) {
+            progressText.textContent = 'Downloading model...';
+        } else if (roundedProgress < 90) {
+            progressText.textContent = 'Processing 3D data...';
+        } else {
+            progressText.textContent = 'Finalizing...';
+        }
+    }
+}
+
+// Hide loading spinner
+function hideLoadingSpinner() {
+    const spinner = document.getElementById('loadingSpinner');
+    if (spinner) {
+        spinner.style.display = 'none';
+    }
+}
+
+// Show error message
+function showError(message) {
+    const container = document.getElementById('modelViewer');
+    container.innerHTML = `
+        <div class="error-message">
+            <i class="fas fa-exclamation-triangle"></i>
+            <p>${message}</p>
+        </div>
+    `;
+}
+
+// Update model information
+function updateModelInfo(model) {
+    const modelInfo = document.getElementById('modelInfo');
+    const isRealTripoModel = model.id && model.id.startsWith('tripo_');
+    const hasRealDownloadUrl = isRealTripoModel && (model.output && model.output.pbr_model);
+    const isPlaceholder = !isRealTripoModel;
+    
+    // Determine download URL - use local endpoint to avoid CORS issues
+    let downloadUrl = null;
+    if (isRealTripoModel) {
+        downloadUrl = `/api/models/${model.id}/download`;
+    } else if (model.download_url && !model.download_url.includes('demo')) {
+        downloadUrl = model.download_url;
+    }
+    
+                modelInfo.innerHTML = `
+                    <p><strong>Prompt:</strong> ${model.prompt}</p>
+                    <p><strong>Format:</strong> ${model.format.toUpperCase()}</p>
+                    <p><strong>Quality:</strong> ${model.quality}</p>
+                    <p><strong>File Size:</strong> ${formatFileSize(model.file_size)}</p>
+        <p><strong>Created:</strong> ${model.created_at ? new Date(model.created_at).toLocaleString() : 'Recently'}</p>
+                    <p><strong>Status:</strong> <span class="badge bg-success">${model.status}</span></p>
+        <p><strong>Model Type:</strong> ${isRealTripoModel ? '<span class="badge bg-success">Realistic 3D Model</span>' : '<span class="badge bg-warning">Dynamic Preview</span>'}</p>
+        ${isRealTripoModel ? '<p class="text-success"><small>✅ This is a real 3D model generated</small></p>' : '<p class="text-muted"><small>🎨 This is a dynamic preview. Generate a real model using the Tripo AI API.</small></p>'}
+        ${downloadUrl ? `<p><strong>Download URL:</strong> <a href="${downloadUrl}" target="_blank" class="btn btn-sm btn-primary">Download GLB</a></p>` : ''}
+    `;
+}
+
+function formatFileSize(bytes) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+}
+
+// Animation loop
+function animate() {
+    requestAnimationFrame(animate);
+    
+    if (autoRotate && modelViewerModel) {
+        modelViewerModel.rotation.y += 0.01;
+    }
+    
+    modelViewerControls.update();
+    modelViewerRenderer.render(modelViewerScene, modelViewerCamera);
+}
+
+// Control functions
+function resetCamera() {
+    if (modelViewerControls) {
+        modelViewerControls.reset();
+    }
+}
+
+function toggleAutoRotate() {
+    autoRotate = !autoRotate;
+    const button = event.target;
+    button.classList.toggle('btn-outline-secondary');
+    button.classList.toggle('btn-primary');
+}
+
+function toggleWireframe() {
+    wireframeMode = !wireframeMode;
+    if (modelViewerModel) {
+        modelViewerModel.traverse(function (child) {
+            if (child.isMesh && child.material) {
+                child.material.wireframe = wireframeMode;
+            }
+        });
+    }
+    const button = event.target;
+    button.classList.toggle('btn-outline-secondary');
+    button.classList.toggle('btn-primary');
+}
+
+function toggleLights() {
+    lightsEnabled = !lightsEnabled;
+    modelViewerScene.children.forEach(child => {
+        if (child.isLight) {
+            child.intensity = lightsEnabled ? 0.8 : 0;
+        }
+    });
+    const button = event.target;
+    button.classList.toggle('btn-outline-secondary');
+    button.classList.toggle('btn-primary');
+}
+
+function changeLighting(type) {
+    // Implementation for different lighting setups
+    console.log('Changing lighting to:', type);
+}
+
+// Action functions
+function downloadModel() {
+    const modelId = '{{ model_id }}';
+    window.open(`/api/models/${modelId}/download`, '_blank');
+}
+
+function viewInAR() {
+    const modelId = '{{ model_id }}';
+    window.open(`/models/${modelId}/ar`, '_blank');
+}
+
+function shareModel() {
+    const url = window.location.href;
+    if (navigator.share) {
+        navigator.share({
+            title: '3D Model Viewer',
+            url: url
+        });
+    } else {
+        navigator.clipboard.writeText(url).then(() => {
+            showToast('Link copied to clipboard!', 'success');
+        });
+    }
+}
+
+function goBack() {
+    window.history.back();
+}
+
+// Make functions globally available
+window.downloadModel = downloadModel;
+window.viewInAR = viewInAR;
+window.shareModel = shareModel;
+window.goBack = goBack;
+window.resetCamera = resetCamera;
+window.toggleAutoRotate = toggleAutoRotate;
+window.toggleWireframe = toggleWireframe;
+window.toggleLights = toggleLights;
+window.changeLighting = changeLighting;
+
+// Handle window resize
+window.addEventListener('resize', () => {
+    if (modelViewerCamera && modelViewerRenderer) {
+        const container = document.getElementById('modelViewer');
+        const width = container.clientWidth;
+        const height = container.clientHeight;
+        
+        modelViewerCamera.aspect = width / height;
+        modelViewerCamera.updateProjectionMatrix();
+        modelViewerRenderer.setSize(width, height);
+    }
+});
+
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    initViewer();
+});
+</script>
+{% endblock %} 

@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% block title %}All Models - 3D AR Demo{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Home</a></li>
+                    <li class="breadcrumb-item active">All Models</li>
+                </ol>
+            </nav>
+            
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>All Generated Models</h2>
+                <a href="{{ url_for('index') }}" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Generate New Model
+                </a>
+            </div>
+            
+            <div class="row" id="modelsList">
+                <!-- Models will be loaded here -->
+                <div class="col-12 text-center">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-2">Loading models...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    loadModels();
+});
+
+function loadModels() {
+    fetch('/api/models')
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                displayModels(data.models);
+            } else {
+                showError('Failed to load models');
+            }
+        })
+        .catch(error => {
+            console.error('Error loading models:', error);
+            showError('Failed to load models');
+        });
+}
+
+function displayModels(models) {
+    const container = document.getElementById('modelsList');
+    
+    if (models.length === 0) {
+        container.innerHTML = `
+            <div class="col-12 text-center">
+                <i class="fas fa-cube" style="font-size: 4rem; color: #6c757d; margin-bottom: 20px;"></i>
+                <h4>No models found</h4>
+                <p class="text-muted">Start by generating your first 3D model!</p>
+                <a href="{{ url_for('index') }}" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Generate Model
+                </a>
+            </div>
+        `;
+        return;
+    }
+    
+    const modelsHtml = models.map(model => `
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">${model.prompt}</h5>
+                    <p class="card-text text-muted">
+                        <small>
+                            <i class="fas fa-calendar"></i> ${new Date(model.created_at).toLocaleDateString()}<br>
+                            <i class="fas fa-file"></i> ${model.format.toUpperCase()}<br>
+                            <i class="fas fa-star"></i> ${model.quality}<br>
+                            <i class="fas fa-weight-hanging"></i> ${formatFileSize(model.file_size)}
+                        </small>
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <div class="btn-group w-100" role="group">
+                        <button class="btn btn-outline-primary btn-sm" onclick="viewModel('${model.id}')">
+                            <i class="fas fa-eye"></i> View
+                        </button>
+                        <button class="btn btn-outline-success btn-sm" onclick="downloadModel('${model.id}')">
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                        <button class="btn btn-outline-info btn-sm" onclick="viewInAR('${model.id}')">
+                            <i class="fas fa-vr-cardboard"></i> AR
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `).join('');
+    
+    container.innerHTML = modelsHtml;
+}
+
+function formatFileSize(bytes) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+}
+
+function viewModel(modelId) {
+    window.location.href = `/view/${modelId}`;
+}
+
+function downloadModel(modelId) {
+    window.open(`/api/models/${modelId}/download`, '_blank');
+}
+
+function viewInAR(modelId) {
+    window.open(`/models/${modelId}/ar`, '_blank');
+}
+
+function showError(message) {
+    const container = document.getElementById('modelsList');
+    container.innerHTML = `
+        <div class="col-12 text-center">
+            <i class="fas fa-exclamation-triangle" style="font-size: 4rem; color: #dc3545; margin-bottom: 20px;"></i>
+            <h4>Error</h4>
+            <p class="text-danger">${message}</p>
+            <button class="btn btn-primary" onclick="loadModels()">
+                <i class="fas fa-redo"></i> Try Again
+            </button>
+        </div>
+    `;
+}
+</script>
+{% endblock %} 

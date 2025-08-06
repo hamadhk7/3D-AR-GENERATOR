@@ -1,0 +1,484 @@
+[
+  {
+    "id": "demo_model_metallic_coffee_cup",
+    "prompt": "A metallic coffee cup",
+    "format": "glb",
+    "quality": "high",
+    "created_at": "2025-08-06T12:45:00.000000",
+    "file_size": 1024000,
+    "status": "completed",
+    "download_url": "/api/models/demo_model_metallic_coffee_cup/download"
+  },
+  {
+    "id": "demo_model_1754429097",
+    "prompt": "A highly detailed red sports car, sleek aerodynamic design, low profile, smooth curves, chrome accents, LED headlights, alloy wheels, leather interior, dashboard with digital displays, side mirrors, exhaust pipes, front grille, windshield wipers, realistic metallic paint finish, professional 3D model quality",
+    "format": "glb",
+    "quality": "high",
+    "created_at": "2025-08-06T02:24:57.681772",
+    "file_size": 1024000,
+    "status": "completed"
+  },
+  {
+    "id": "demo_model_1754429214",
+    "prompt": "make a human",
+    "format": "glb",
+    "quality": "high",
+    "created_at": "2025-08-06T02:26:54.044597",
+    "file_size": 1024000,
+    "status": "completed"
+  },
+  {
+    "id": "demo_model_1754429214",
+    "prompt": "make a human",
+    "format": "glb",
+    "quality": "high",
+    "created_at": "2025-08-06T02:26:54.045603",
+    "file_size": 1024000,
+    "status": "completed"
+  },
+  {
+    "id": "demo_model_1754429235",
+    "prompt": "realistic red sports car with detailed features",
+    "format": "glb",
+    "quality": "high",
+    "created_at": "2025-08-06T02:27:15.377144",
+    "file_size": 1024000,
+    "status": "completed"
+  },
+  {
+    "id": "demo_model_1754429298",
+    "prompt": "A highly detailed red sports car with chrome accents, LED headlights, alloy wheels, leather interior, dashboard with digital displays, side mirrors, exhaust pipes, front grille, windshield wipers, realistic metallic paint finish, professional 3D model quality",
+    "format": "glb",
+    "quality": "high",
+    "created_at": "2025-08-06T02:28:18.965953",
+    "file_size": 1024000,
+    "status": "completed"
+  },
+  {
+    "id": "demo_model_1754429342",
+    "prompt": "A highly detailed red sports car with chrome accents, LED headlights, alloy wheels, leather interior, dashboard with digital displays, side mirrors, exhaust pipes, front grille, windshield wipers, realistic metallic paint finish, professional 3D model quality",
+    "format": "glb",
+    "quality": "high",
+    "created_at": "2025-08-06T02:29:02.936688",
+    "file_size": 1024000,
+    "status": "completed"
+  },
+  {
+    "id": "demo_model_1754429343",
+    "prompt": "A highly detailed red sports car with chrome accents, LED headlights, alloy wheels, leather interior, dashboard with digital displays, side mirrors, exhaust pipes, front grille, windshield wipers, realistic metallic paint finish, professional 3D model quality",
+    "format": "glb",
+    "quality": "high",
+    "created_at": "2025-08-06T02:29:03.270848",
+    "file_size": 1024000,
+    "status": "completed"
+  },
+  {
+    "id": "demo_model_1754429729",
+    "prompt": "A highly detailed red sports car with chrome accents, LED headlights, alloy wheels, leather interior, dashboard with digital displays, side mirrors, exhaust pipes, front grille, windshield wipers, realistic metallic paint finish, professional 3D model quality",
+    "format": "glb",
+    "quality": "high",
+    "created_at": "2025-08-06T02:35:29.784297",
+    "file_size": 1024000,
+    "status": "completed"
+  },
+  {
+    "id": "demo_model_1754429756",
+    "prompt": "red sports car",
+    "format": "glb",
+    "quality": "high",
+    "created_at": "2025-08-06T02:35:56.138804",
+    "file_size": 1024000,
+    "status": "completed"
+  },
+  {
+    "id": "demo_model_1754429860",
+    "prompt": "red sports car",
+    "format": "glb",
+    "quality": "high",
+    "created_at": "2025-08-06T02:37:40.884412",
+    "file_size": 1024000,
+    "status": "completed"
+  },
+  {
+    "id": "demo_model_1754430124",
+    "prompt": "red sports car",
+    "format": "glb",
+    "quality": "high",
+    "created_at": "2025-08-06T02:42:04.980892",
+    "file_size": 1024000,
+    "status": "completed"
+  },
+  {
+    "id": "demo_model_1754430257",
+    "prompt": "red sports car",
+    "format": "glb",
+    "quality": "high",
+    "created_at": "2025-08-06T02:44:17.744066",
+    "file_size": 1024000,
+    "status": "completed"
+  },
+  {
+    "id": "demo_model_1754430790",
+    "prompt": "red sports car",
+    "format": "glb",
+    "quality": "high",
+    "created_at": "2025-08-06T02:53:10.189553",
+    "file_size": 1024000,
+    "status": "completed"
+  },
+  {
+    "id": "demo_model_1754430818",
+    "prompt": "red sports car",
+    "format": "glb",
+    "quality": "high",
+    "created_at": "2025-08-06T02:53:38.275765",
+    "file_size": 1024000,
+    "status": "completed"
+  },
+  {
+    "id": "demo_model_1754430849",
+    "prompt": "red sports car",
+    "format": "glb",
+    "quality": "high",
+    "created_at": "2025-08-06T02:54:09.124031",
+    "file_size": 1024000,
+    "status": "completed"
+  },
+  {
+    "id": "demo_model_1754430885",
+    "prompt": "red sports car",
+    "format": "glb",
+    "quality": "high",
+    "created_at": "2025-08-06T02:54:45.954321",
+    "file_size": 1024000,
+    "status": "completed"
+  },
+  {
+    "id": "demo_model_1754430939",
+    "prompt": "red sports car",
+    "format": "glb",
+    "quality": "high",
+    "created_at": "2025-08-06T02:55:39.130896",
+    "file_size": 1024000,
+    "status": "completed"
+  },
+  {
+    "id": "demo_model_1754430991",
+    "prompt": "red sports car",
+    "format": "glb",
+    "quality": "high",
+    "created_at": "2025-08-06T02:56:31.791553",
+    "file_size": 1024000,
+    "status": "completed"
+  },
+  {
+    "id": "demo_model_1754431262",
+    "prompt": "red sports car",
+    "format": "glb",
+    "quality": "high",
+    "created_at": "2025-08-06T03:01:02.146630",
+    "file_size": 1024000,
+    "status": "completed"
+  },
+  {
+    "id": "demo_model_1754431920",
+    "prompt": "red sports car",
+    "format": "glb",
+    "quality": "high",
+    "created_at": "2025-08-06T03:12:00.606279",
+    "file_size": 1024000,
+    "status": "completed"
+  },
+  {
+    "id": "demo_model_1754432902",
+    "prompt": "red sports car",
+    "format": "glb",
+    "quality": "high",
+    "created_at": "2025-08-06T03:28:22.520257",
+    "file_size": 1024000,
+    "status": "completed"
+  },
+  {
+    "id": "demo_model_1754433071",
+    "prompt": "red sports car",
+    "format": "glb",
+    "quality": "high",
+    "created_at": "2025-08-06T03:31:11.119628",
+    "file_size": 1024000,
+    "status": "completed"
+  },
+  {
+    "id": "demo_model_1754434754",
+    "prompt": "red sports car",
+    "status": "completed",
+    "format": "glb",
+    "quality": "high",
+    "created_at": "2025-08-06T03:59:14.076196",
+    "download_url": "/api/models/demo_model_1754434754/download",
+    "file_size": 12383249,
+    "generation_time": 34,
+    "credits_used": 1,
+    "credits_remaining": 598
+  },
+  {
+    "id": "demo_model_1754434888",
+    "prompt": "Generate me a red sports car",
+    "status": "completed",
+    "format": "glb",
+    "quality": "high",
+    "created_at": "2025-08-06T04:01:28.466977",
+    "download_url": "/api/models/demo_model_1754434888/download",
+    "file_size": 12316154,
+    "generation_time": 99,
+    "credits_used": 1,
+    "credits_remaining": 597
+  },
+  {
+    "id": "demo_model_1754485848",
+    "prompt": "A metallic coffee cup",
+    "status": "completed",
+    "format": "glb",
+    "quality": "high",
+    "created_at": "2025-08-06T18:10:48.269201",
+    "download_url": "/api/models/demo_model_1754485848/download",
+    "file_size": 5780563,
+    "generation_time": 92,
+    "credits_used": 1,
+    "credits_remaining": 597
+  },
+  {
+    "id": "demo_model_1754486472",
+    "prompt": "A silver motorcycle with leather seats",
+    "status": "completed",
+    "format": "glb",
+    "quality": "high",
+    "created_at": "2025-08-06T18:21:12.165933",
+    "download_url": "/api/models/demo_model_1754486472/download",
+    "file_size": 13151618,
+    "generation_time": 50,
+    "credits_used": 1,
+    "credits_remaining": 597
+  },
+  {
+    "id": "demo_model_1754486567",
+    "prompt": "a metallic coffee cup",
+    "status": "completed",
+    "format": "glb",
+    "quality": "high",
+    "created_at": "2025-08-06T18:22:47.761042",
+    "download_url": "/api/models/demo_model_1754486567/download",
+    "file_size": 5721093,
+    "generation_time": 68,
+    "credits_used": 1,
+    "credits_remaining": 597
+  },
+  {
+    "id": "tripo_86fde11c-0273-40cf-8b55-576a9c678c15",
+    "prompt": "A red sports car",
+    "format": "glb",
+    "quality": "high",
+    "created_at": null,
+    "file_size": 1024000,
+    "status": "completed",
+    "download_url": null,
+    "tripo_task_id": "86fde11c-0273-40cf-8b55-576a9c678c15"
+  },
+  {
+    "id": "tripo_64ba91f8-7d7c-4814-9088-c61388f6d0c9",
+    "prompt": "only car",
+    "format": "glb",
+    "quality": "high",
+    "created_at": null,
+    "file_size": 1024000,
+    "status": "completed",
+    "download_url": null,
+    "tripo_task_id": "64ba91f8-7d7c-4814-9088-c61388f6d0c9"
+  },
+  {
+    "id": "tripo_64d22768-f35c-42d8-a9aa-fc298a6668fb",
+    "prompt": "only car",
+    "format": "glb",
+    "quality": "high",
+    "created_at": null,
+    "file_size": 1024000,
+    "status": "completed",
+    "download_url": null,
+    "tripo_task_id": "64d22768-f35c-42d8-a9aa-fc298a6668fb"
+  },
+  {
+    "id": "tripo_3f1ab50b-835b-49ea-82bc-e858c2734a13",
+    "prompt": "A blue sports car",
+    "format": "glb",
+    "quality": "high",
+    "created_at": null,
+    "file_size": 1024000,
+    "status": "completed",
+    "download_url": null,
+    "tripo_task_id": "3f1ab50b-835b-49ea-82bc-e858c2734a13",
+    "output": {
+      "pbr_model": "https://tripo-data.rg1.data.tripo3d.com/tcli_48b1359dd3454c64b50f9bc9d295dc63/20250806/3f1ab50b-835b-49ea-82bc-e858c2734a13/tripo_pbr_model_3f1ab50b-835b-49ea-82bc-e858c2734a13.glb?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDhiMTM1OWRkMzQ1NGM2NGI1MGY5YmM5ZDI5NWRjNjMvMjAyNTA4MDYvM2YxYWI1MGItODM1Yi00OWVhLTgyYmMtZTg1OGMyNzM0YTEzL3RyaXBvX3Bicl9tb2RlbF8zZjFhYjUwYi04MzViLTQ5ZWEtODJiYy1lODU4YzI3MzRhMTMuZ2xiIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzU0NTI0ODAwfX19XX0_&Signature=rl9mMBFRgpILJcLxaru7Shau4c3aRefR9PAyAfxSUDnPqjmLVZAQsQU7z0NkGak1sqc~wTr1g0pSNKVCX~JCePj2gnDKEoH7dupOI1hXOxp6dL3igQwYt1~cdLL65Q22ain6mLa5oHCc-9RSwGI109p1G3K9HM2nFlQbMzq1G4gcheynXAbPgrU0E5Qbu7cnAmBmpCzMuYdGPqMTdut5rTMFJTIOwoWDR7XLR9etdRaJpCytYlUEz1VuzSOIrU27MB1FZJzz3PgkvZJIoYp4VC1X6d0DVNrznyKhtHow3qNl8x1ULcUpwt50-Ie18oBxg7uywzOja997EvMNuJu9nQ__&Key-Pair-Id=K1676C64NMVM2J",
+      "generated_image": "https://tripo-data.rg1.data.tripo3d.com/tcli_48b1359dd3454c64b50f9bc9d295dc63/20250806/3f1ab50b-835b-49ea-82bc-e858c2734a13/im.webp?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDhiMTM1OWRkMzQ1NGM2NGI1MGY5YmM5ZDI5NWRjNjMvMjAyNTA4MDYvM2YxYWI1MGItODM1Yi00OWVhLTgyYmMtZTg1OGMyNzM0YTEzL2ltLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3NTQ1MjQ4MDB9fX1dfQ__&Signature=RRNSxDva058Pn6WD36fFeXlnATi~raFKeLTiPHZKZSeMlh~uHE3dRP3m6CbhbayJjFhD5kRKFcv~t6TthX3WODzHIfQWELL-C9STRy6n99jKooXZLJteohsOQDrDUqZjZqdIbqZpQlmz4g~cH~M9EkD3-qjhqLL5~UinzyrzoaNF0d4Uswu37t~KKGRVFCBK5cS4G2KsGiCSZZYTl2G3cJ5B8isOjDJQDAjveSiWxeApOSD7jBGMYpe0M1vy--PKTbIxwEUFKLjDjRSmqeVrD1tfVT7iGxT4jCrAFBZuluvEq-15K8F-qPArlfa0Uh68FGZEr5TmxiEZKMZ0SfLHiw__&Key-Pair-Id=K1676C64NMVM2J",
+      "rendered_image": "https://tripo-data.rg1.data.tripo3d.com/tcli_48b1359dd3454c64b50f9bc9d295dc63/20250806/3f1ab50b-835b-49ea-82bc-e858c2734a13/legacy_mesh.webp?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDhiMTM1OWRkMzQ1NGM2NGI1MGY5YmM5ZDI5NWRjNjMvMjAyNTA4MDYvM2YxYWI1MGItODM1Yi00OWVhLTgyYmMtZTg1OGMyNzM0YTEzL2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3NTQ1MjQ4MDB9fX1dfQ__&Signature=k~AKmBAGPNzhh2Q9FuAPV5s133BAxcm2NDMmRWlD3xQS4-Myw8WT8Cb2so3RX0fFWsEWNwXlPy8upg8Q5sXXKBrByKXfrzSBWqQTYTuXFS08fofkzjchW8bqwPL20tfAd9bwF69oq8eFUCsaTEGenr5hTQGn4S4pXC5IHvZ8UQVXf-CKrHHoiDUYWRQp9TMRVbZWj16BpJinQ8Y5g-bkP7ebDsbH9J1FwauvEJXEZSMWkY9~Ds-hZAjmS7LYP8hwgZH4D5zvU1C1oOyKOi8HXXDLfbfWkblTQCU0yLjnLDNFua~wz8uLLC2Sbg4rf-dy67b3hHRPIwihsjcLSyKErQ__&Key-Pair-Id=K1676C64NMVM2J"
+    }
+  },
+  {
+    "id": "tripo_9586e0d4-6e69-44f3-a54e-432846d3ecf2",
+    "prompt": "a motorbike",
+    "format": "glb",
+    "quality": "high",
+    "created_at": null,
+    "file_size": 1024000,
+    "status": "completed",
+    "download_url": null,
+    "tripo_task_id": "9586e0d4-6e69-44f3-a54e-432846d3ecf2",
+    "output": {
+      "pbr_model": "https://tripo-data.rg1.data.tripo3d.com/tcli_48b1359dd3454c64b50f9bc9d295dc63/20250806/9586e0d4-6e69-44f3-a54e-432846d3ecf2/tripo_pbr_model_9586e0d4-6e69-44f3-a54e-432846d3ecf2.glb?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDhiMTM1OWRkMzQ1NGM2NGI1MGY5YmM5ZDI5NWRjNjMvMjAyNTA4MDYvOTU4NmUwZDQtNmU2OS00NGYzLWE1NGUtNDMyODQ2ZDNlY2YyL3RyaXBvX3Bicl9tb2RlbF85NTg2ZTBkNC02ZTY5LTQ0ZjMtYTU0ZS00MzI4NDZkM2VjZjIuZ2xiIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzU0NTI0ODAwfX19XX0_&Signature=CUghfx2pkaUBVNcgGIpG88M4Hq5HEoFMlD8SBho-3rbHeqXlqd9FOcSFgKHz5okYEJRHoO3wwCtSLsBPUDMAOlV~qcuCpCserzCYt0cBIJX3-nh0wC3y13jW22~-FVPNCzAcyCpX307Xr51JadqU9D85iGcvQoTsn7GtD3ZjPOOtOSis5sNI9HCZOm-3NypLDNCEmS0ehnnB25kPmkcm6AXq2PQ8GMXM5cvlI2qPlMWIidfQZPt8~hHvvpw4uHhN3VBdguTMK~ZmZhOIoGjzuTo~vu6E9A4qhWQ0dCvCKRxHS71TAjNlm5JPmoOLEA74fPl7rStcMj0D-n0i~VMqbA__&Key-Pair-Id=K1676C64NMVM2J",
+      "generated_image": "https://tripo-data.rg1.data.tripo3d.com/tcli_48b1359dd3454c64b50f9bc9d295dc63/20250806/9586e0d4-6e69-44f3-a54e-432846d3ecf2/im.webp?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDhiMTM1OWRkMzQ1NGM2NGI1MGY5YmM5ZDI5NWRjNjMvMjAyNTA4MDYvOTU4NmUwZDQtNmU2OS00NGYzLWE1NGUtNDMyODQ2ZDNlY2YyL2ltLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3NTQ1MjQ4MDB9fX1dfQ__&Signature=dGR~GddiMGvUmfxcoFUjKQoDA4oy1x9K8Q~MEKFY26ux4XnT4nMJFjETehEf1D73jTjM9Ie76uLbebk3DAVaVaQaJ1jfnGa68cfnxg3OsmMFWRI71qWzVsuZKfYvvERasNsW0X9pdEZF0FK2KkLuhf~NiiU8pf03GU3Z8ySuXyLjVzjzwh38OIzej3IV0BjCr-B49UflIk6pahUX0EtBD51wiMmuGNzC03UO6gPzESHkh6Z44fal13Pf4ebMxKcVkqGlObmm4TWpKsFJ4WATcB82GecZeYaprS~Li9ijHtfYKHhRy419I-1xHvH5rhCDpX1KAi-9fsSVynFbMql33w__&Key-Pair-Id=K1676C64NMVM2J",
+      "rendered_image": "https://tripo-data.rg1.data.tripo3d.com/tcli_48b1359dd3454c64b50f9bc9d295dc63/20250806/9586e0d4-6e69-44f3-a54e-432846d3ecf2/legacy_mesh.webp?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDhiMTM1OWRkMzQ1NGM2NGI1MGY5YmM5ZDI5NWRjNjMvMjAyNTA4MDYvOTU4NmUwZDQtNmU2OS00NGYzLWE1NGUtNDMyODQ2ZDNlY2YyL2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3NTQ1MjQ4MDB9fX1dfQ__&Signature=dgeP8g0iBB-v9AiEwfv79bVeC5adhUSjw4ugfTXboPTHqSAVdRH0pg~8vN848R7Gbl5al~xK2nyzshH6N~XkZD2hQlcrqBk3MEcrGtq8NfWftRAWNWJPvb72xwtV9lJjmfO5tcX627OLP0gyraToVrU5o8APad9kS5Y~5tMPrX-k1piOCPnArVF4L4EhKHM9TKgDiBu07KuITnKpY-T87kxEMSlZbGYiwRyIE0NFJrfYruM59uKp6H5uIVvzueQGREN4N0rzu3JVi9nXahxMHUE2jOOFZtiyelFK7H7KHAag77MICRWnU2FJw2OQ5KVweE7RiLGAv36moNzcyMDXVQ__&Key-Pair-Id=K1676C64NMVM2J"
+    }
+  },
+  {
+    "id": "tripo_dd8ef397-da85-4974-953a-bb6813d76978",
+    "prompt": "a motorbike",
+    "format": "glb",
+    "quality": "high",
+    "created_at": null,
+    "file_size": 1024000,
+    "status": "completed",
+    "download_url": null,
+    "tripo_task_id": "dd8ef397-da85-4974-953a-bb6813d76978",
+    "output": {
+      "pbr_model": "https://tripo-data.rg1.data.tripo3d.com/tcli_48b1359dd3454c64b50f9bc9d295dc63/20250806/dd8ef397-da85-4974-953a-bb6813d76978/tripo_pbr_model_dd8ef397-da85-4974-953a-bb6813d76978.glb?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDhiMTM1OWRkMzQ1NGM2NGI1MGY5YmM5ZDI5NWRjNjMvMjAyNTA4MDYvZGQ4ZWYzOTctZGE4NS00OTc0LTk1M2EtYmI2ODEzZDc2OTc4L3RyaXBvX3Bicl9tb2RlbF9kZDhlZjM5Ny1kYTg1LTQ5NzQtOTUzYS1iYjY4MTNkNzY5NzguZ2xiIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzU0NTI0ODAwfX19XX0_&Signature=xXkWy3YecDf6HwXqKFI37SclUZ6n~XstfEf140TzI2Fe5f~Qw~GUsCpa6LlWzOrZqKd6ztLo442iI5GVPoWzJHMNkNscHKDaKvbUZ6tXGQDeZ-YpdRHo9ot6btQXzOrQDcKalb8Lei8wdz8uPaEFLVnZPmUFSdsEd6zDKrqDfC11kNkIQSzU-Xr8181NFtKvT8MH40upflsd8nfDMITvIpRVEzEZ6KerlTB8GLM01k81PFfhmwzGMHovMOcaeM6P0ePxN9isPMx43OCgvjXdQ~b21gLAAuQrTi7l6vWBw4LriMMBHbZvGhgAeHiOGZjCwDlEfXsD1~4gsaCkTEZVWw__&Key-Pair-Id=K1676C64NMVM2J",
+      "generated_image": "https://tripo-data.rg1.data.tripo3d.com/tcli_48b1359dd3454c64b50f9bc9d295dc63/20250806/dd8ef397-da85-4974-953a-bb6813d76978/im.webp?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDhiMTM1OWRkMzQ1NGM2NGI1MGY5YmM5ZDI5NWRjNjMvMjAyNTA4MDYvZGQ4ZWYzOTctZGE4NS00OTc0LTk1M2EtYmI2ODEzZDc2OTc4L2ltLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3NTQ1MjQ4MDB9fX1dfQ__&Signature=op1zwbD5cW9f4YuXwNGTc5fDBqi~lSlR4lOz7hJ2r~rxleV13XdFwnee8mzF4HBeribTYw9-0zq-KLe6xYrmqNmDCjNdFdgpFGrf-bKyS2~dxL2BQgFnb54RH9wfCuWsVvxXluUVS1hqgxNKzafafO2spjWIvwFUmEwXhnK9AbiSBZuw-QpAytDCCugs9JjM-kyLxcjxQgkuqMiI46Ug7sGRpAUg85iGJ1T02zhIZlBAo~eI3ZFBHkE81DFOqs~14YTOKkEO13CmSST1hlmPdtpSWFkc~7V2oyVopO7~6bdt6qyGppcsewT9EJHkMMpnWPD~CsoAZOOFyHT9dcmzrA__&Key-Pair-Id=K1676C64NMVM2J",
+      "rendered_image": "https://tripo-data.rg1.data.tripo3d.com/tcli_48b1359dd3454c64b50f9bc9d295dc63/20250806/dd8ef397-da85-4974-953a-bb6813d76978/legacy_mesh.webp?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDhiMTM1OWRkMzQ1NGM2NGI1MGY5YmM5ZDI5NWRjNjMvMjAyNTA4MDYvZGQ4ZWYzOTctZGE4NS00OTc0LTk1M2EtYmI2ODEzZDc2OTc4L2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3NTQ1MjQ4MDB9fX1dfQ__&Signature=QoPXmgZMyrXBYdaDup7BTj7UQufhrz5T48W3gS1hIAi64AzsJd2sSM8ShBa8Mp7lwODNqSK6cBzY1qLymsJIbZduogmd~eRbtOW5APYTmXag1Oxcrj4bGVb2Yhz0G03ue9DUnSg2YDsrNPPSeYwTJ08LAuMmKjGIOH2lMN-~TmPVr7SuOZCs~A-qFFetQgNNgokgWXdFrGRaOR5kgpmziV9X73b9MVAhYlgZ~5ojJ3RdUWkPRoX69xW8ldyhW~dkTevQekiQ1kBZT406QwQ0z2GYerK~avEb6gdsn5i3likadgai-Xa02yJEMLOgcOcKAOTNnVh3OpJW8kDpcrghog__&Key-Pair-Id=K1676C64NMVM2J"
+    }
+  },
+  {
+    "id": "tripo_87aec495-73c1-4857-932f-238aaf6dd868",
+    "prompt": "make a flower",
+    "format": "glb",
+    "quality": "high",
+    "created_at": null,
+    "file_size": 1024000,
+    "status": "completed",
+    "download_url": null,
+    "tripo_task_id": "87aec495-73c1-4857-932f-238aaf6dd868",
+    "output": {
+      "pbr_model": "https://tripo-data.rg1.data.tripo3d.com/tcli_48b1359dd3454c64b50f9bc9d295dc63/20250806/87aec495-73c1-4857-932f-238aaf6dd868/tripo_pbr_model_87aec495-73c1-4857-932f-238aaf6dd868.glb?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDhiMTM1OWRkMzQ1NGM2NGI1MGY5YmM5ZDI5NWRjNjMvMjAyNTA4MDYvODdhZWM0OTUtNzNjMS00ODU3LTkzMmYtMjM4YWFmNmRkODY4L3RyaXBvX3Bicl9tb2RlbF84N2FlYzQ5NS03M2MxLTQ4NTctOTMyZi0yMzhhYWY2ZGQ4NjguZ2xiIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzU0NTI0ODAwfX19XX0_&Signature=AG0PqUVo8Wc~UL05vqmznZmVFIGlm2nomijgXuzFR01mK1jaLgh8TiTqASJqqXUQ5o2pbw66I-WW-xKrJ83H4f6f1J6vAYPv~Sec-uA9DqW6qqRLnTwOrsJu5Hy9M3VpG1NQe4hgBAu3ELsmxJFq8uQFLZOK7vZdA4-xXi2ZVvDN0ZTwPcNWCPobRaB7k4xZvhgaeXJ1L7-X6shnBcj7oSJ8LNIZ99wRewtGhUo3yNb6Fg3sP7VZYH1fBq99KH-gBXGzA8RC2IufqMAWB2nlUow9r1AqQQvz7~XC3t8Gg-emoRL~-VSdFiqdKgsyWioQjJJ1ZPylUjSF6pZj0uH1pg__&Key-Pair-Id=K1676C64NMVM2J",
+      "generated_image": "https://tripo-data.rg1.data.tripo3d.com/tcli_48b1359dd3454c64b50f9bc9d295dc63/20250806/87aec495-73c1-4857-932f-238aaf6dd868/im.webp?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDhiMTM1OWRkMzQ1NGM2NGI1MGY5YmM5ZDI5NWRjNjMvMjAyNTA4MDYvODdhZWM0OTUtNzNjMS00ODU3LTkzMmYtMjM4YWFmNmRkODY4L2ltLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3NTQ1MjQ4MDB9fX1dfQ__&Signature=h8~-pZ7To-64DW5Lq-ax9-HvNxeqzu4kEv6bf23grwNjHmr1F3FEhKxDt5vaeaw78Dl0TH51OdYO2G7gs946QChrrLzcd-H~Wv-y0U5a1UOwkZnll29uHq3BcTteIt5EpM8PKGPrfIZVYDgHS88sFVxWhTLqaJfeWzbEnjGp-0dZNPenjx~5lfsZpzEn70h~lDHDyWIlDdoDFtlmKclUNSZk5LVhXW9Ca~AuxblCwG5ru6x4WXm9ADVoGMJQtEIvz5ofEtnEw05wfRE7jh59Z4zV2kvvuFwANBzbk2VHRNyhvjIUwuHjFX3tdk2GDKriIdFoKD-OJp5fWh99ar4KvQ__&Key-Pair-Id=K1676C64NMVM2J",
+      "rendered_image": "https://tripo-data.rg1.data.tripo3d.com/tcli_48b1359dd3454c64b50f9bc9d295dc63/20250806/87aec495-73c1-4857-932f-238aaf6dd868/legacy_mesh.webp?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDhiMTM1OWRkMzQ1NGM2NGI1MGY5YmM5ZDI5NWRjNjMvMjAyNTA4MDYvODdhZWM0OTUtNzNjMS00ODU3LTkzMmYtMjM4YWFmNmRkODY4L2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3NTQ1MjQ4MDB9fX1dfQ__&Signature=lfIdTT6mWcUrGLq5RtOXx-FxM0fAAKHfsus2yo7MIChoyHHUmXf7teucAKIxHxtO-M-StS0fMAM~NOR7cDA869TH01mv-NpPyNdurp5stpjVr7NPd0q553QvO3u5gAoeqQvGvoUlvJxURumvJE1rt6HJMog2HJubpUMQkhTqYNaayw90aw8c3PcU0d0Pb~o1QWflAptRcx1-I3KIlK3stSuu5ptmVnQhkOaCsAdprUiSsJrfC9Ou9nlnJ8ILgGiWhRzl7oZuILVQ-foc8~BXnpE4N8stlXBGwu5N5MatstFZgGusJdGVENAwBEjwyz-1eTcuoafNNvP1Dm7OOvphpQ__&Key-Pair-Id=K1676C64NMVM2J"
+    }
+  },
+  {
+    "id": "tripo_737e3e90-2be2-4bb7-8a62-c26420888e36",
+    "prompt": "make a flower",
+    "format": "usdz",
+    "quality": "high",
+    "created_at": null,
+    "file_size": 1024000,
+    "status": "completed",
+    "download_url": null,
+    "tripo_task_id": "737e3e90-2be2-4bb7-8a62-c26420888e36",
+    "output": {
+      "pbr_model": "https://tripo-data.rg1.data.tripo3d.com/tcli_48b1359dd3454c64b50f9bc9d295dc63/20250806/737e3e90-2be2-4bb7-8a62-c26420888e36/tripo_pbr_model_737e3e90-2be2-4bb7-8a62-c26420888e36.glb?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDhiMTM1OWRkMzQ1NGM2NGI1MGY5YmM5ZDI5NWRjNjMvMjAyNTA4MDYvNzM3ZTNlOTAtMmJlMi00YmI3LThhNjItYzI2NDIwODg4ZTM2L3RyaXBvX3Bicl9tb2RlbF83MzdlM2U5MC0yYmUyLTRiYjctOGE2Mi1jMjY0MjA4ODhlMzYuZ2xiIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzU0NTI0ODAwfX19XX0_&Signature=bPne-R5hh38B8m8IbThfTJ5NZkiaVboNrrMywA5alGrGpzcIfn7FnA5z~Nc1L0hweRMpDhnAXi4H8M9dzhC8~Hmbd~weyqkFupyUQkbBnFMIzEp15w3j4m2U~08RmvEkQKZGCxJk~-aB1hhqxSaE5NuBAUgAhaLpaKqgsyN0GzqfkjW4ADEblbVgC0K6FkUrzOvquxkEcnjventU6U--YJ500TOS5IfUjwpzMypxf333v4f7lU2iCNcZueAQK3vk~BJyPfnMxnEqYWK~LQnyZZhK~qKkB3jjo2xgNDXpA1NbI49q3D10n6gCvGU73x3XVceCgowuKYL6eIbidIq-Uw__&Key-Pair-Id=K1676C64NMVM2J",
+      "generated_image": "https://tripo-data.rg1.data.tripo3d.com/tcli_48b1359dd3454c64b50f9bc9d295dc63/20250806/737e3e90-2be2-4bb7-8a62-c26420888e36/im.webp?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDhiMTM1OWRkMzQ1NGM2NGI1MGY5YmM5ZDI5NWRjNjMvMjAyNTA4MDYvNzM3ZTNlOTAtMmJlMi00YmI3LThhNjItYzI2NDIwODg4ZTM2L2ltLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3NTQ1MjQ4MDB9fX1dfQ__&Signature=DU~pq93PfO8YR-s2TbDs4IohBeEWbim654ZYat0Js8WAJXQH1DDzLqkr45WCgqrNyJ0Unok8ytMf0HwS1MEnfz8aHSEfQAVdrS1OlVRdryjvct8g8JzsZGPOOvv3zLhPdczUar5HIfC0uuxcCZpLE4a9uctk~RpEzONKykqb8RZZJn3WYNIGqyEB1wpBPJXwVnKr2h7WHRf2eg9wylc6pbR8pJdusGZEmdYOHHZ6ldJIvW5Ykutr6rhqd-dlD0cZkjX2p5k9m-GDxXCtnGM1oBS33NfClimtNEsKguGAOKvI-zQqUwAuyk8AjqbopOtN54Uu7GxUBLNiSGeo5IRRGg__&Key-Pair-Id=K1676C64NMVM2J",
+      "rendered_image": "https://tripo-data.rg1.data.tripo3d.com/tcli_48b1359dd3454c64b50f9bc9d295dc63/20250806/737e3e90-2be2-4bb7-8a62-c26420888e36/legacy_mesh.webp?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDhiMTM1OWRkMzQ1NGM2NGI1MGY5YmM5ZDI5NWRjNjMvMjAyNTA4MDYvNzM3ZTNlOTAtMmJlMi00YmI3LThhNjItYzI2NDIwODg4ZTM2L2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3NTQ1MjQ4MDB9fX1dfQ__&Signature=N~tLnTfSKXTngFNeX~QLTCq6Tw~aGMOAqzUcQCoE3Ra9sw~AptpTqY6oBlW--AAxtho-do3A00SHPBZ2~x8guqZ7a0KHUceuNtdMW6mTGeaj8JYmEqEpIiL5r2gEc5R~MjQk5Nw8D06iD3vUGQlLk1k0wWRXOkjhV4FWjBqAxNUMQLhEso4oulB7OO69QP26QVA1a8uHUTrLrIStC8QBzxMjDvzHnAuStJaupFrjFxRVPe4cPcgS8UWhHMegHoDpZCZCO3ZNEtv0XYkK~674gLaatwXUlS-pJqrv6R3QNrXi~iNbY4MIMC~9153gNTHQST56A~vIbmiFRem0YxVCKw__&Key-Pair-Id=K1676C64NMVM2J"
+    }
+  },
+  {
+    "id": "tripo_f1a51cf6-65a9-44c4-8002-1ac400b722a7",
+    "prompt": "make a keyboard for the gaming",
+    "format": "glb",
+    "quality": "high",
+    "created_at": null,
+    "file_size": 1024000,
+    "status": "completed",
+    "download_url": null,
+    "tripo_task_id": "f1a51cf6-65a9-44c4-8002-1ac400b722a7",
+    "output": {
+      "pbr_model": "https://tripo-data.rg1.data.tripo3d.com/tcli_48b1359dd3454c64b50f9bc9d295dc63/20250806/f1a51cf6-65a9-44c4-8002-1ac400b722a7/tripo_pbr_model_f1a51cf6-65a9-44c4-8002-1ac400b722a7.glb?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDhiMTM1OWRkMzQ1NGM2NGI1MGY5YmM5ZDI5NWRjNjMvMjAyNTA4MDYvZjFhNTFjZjYtNjVhOS00NGM0LTgwMDItMWFjNDAwYjcyMmE3L3RyaXBvX3Bicl9tb2RlbF9mMWE1MWNmNi02NWE5LTQ0YzQtODAwMi0xYWM0MDBiNzIyYTcuZ2xiIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzU0NTI0ODAwfX19XX0_&Signature=SjlqckdrDiZNehhrC1kl4Sfj~1RPijV4CaThHqjjWSKlxnz37hWjHWuPbq7RV0JzJPBZzgIUPKtp5wB4~io5tDs8GBPipafOd3-rFKWEecQxNnet6XXu4QknC7FPsARzJ8iFZwjnCctbSqcQE6VZT3GVlUtx2Xt5ZXnyIjXiCdDidyLSVy6hKJ5HDoERt~kdg1-C6JEy5JsEoForQ4XLXl52nExt8gcqi9XMYPdC5u2k1tvS0lPnwby-VqGCetyofTRD1BHMvQ0U0Vvj5Sb3zacL3kpFvUcOKPI9JwgD2~LWhLJAbZXo8767~1lPIttYJpJzd0EEGBoaI9heS4Voqw__&Key-Pair-Id=K1676C64NMVM2J",
+      "generated_image": "https://tripo-data.rg1.data.tripo3d.com/tcli_48b1359dd3454c64b50f9bc9d295dc63/20250806/f1a51cf6-65a9-44c4-8002-1ac400b722a7/im.webp?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDhiMTM1OWRkMzQ1NGM2NGI1MGY5YmM5ZDI5NWRjNjMvMjAyNTA4MDYvZjFhNTFjZjYtNjVhOS00NGM0LTgwMDItMWFjNDAwYjcyMmE3L2ltLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3NTQ1MjQ4MDB9fX1dfQ__&Signature=ZB4An4e~npxyiQReerecOzU71NOgSAydeEntdsErhXKkIs7Eu0rDTi600Wr-vFWDNoGZyZHV3mF5D-cWLoFdd0NeUGx90IPFgfK5ZGrDJgOV3Kqj-O91kHElD0dJBQ2cBPS2-4-lp6dygZhc~OVT7YEKp3PXHA6c0Fg6pPXlXctvg7y~1wKb0KjUSJvNA~zLartsMAKXRFxNbaVuepmXsoKLzkgLHcLug-oEreSx-~3cpUoWziPKaWHNUU8ctJC0svMLIywEzTc7O9xhf9z~0MDM5CKgeKVzaxN3G~bKMyM16ux2RNrctsEaTE4KBXQgEXXM84VjB067jBCcQOMnug__&Key-Pair-Id=K1676C64NMVM2J",
+      "rendered_image": "https://tripo-data.rg1.data.tripo3d.com/tcli_48b1359dd3454c64b50f9bc9d295dc63/20250806/f1a51cf6-65a9-44c4-8002-1ac400b722a7/legacy_mesh.webp?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDhiMTM1OWRkMzQ1NGM2NGI1MGY5YmM5ZDI5NWRjNjMvMjAyNTA4MDYvZjFhNTFjZjYtNjVhOS00NGM0LTgwMDItMWFjNDAwYjcyMmE3L2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3NTQ1MjQ4MDB9fX1dfQ__&Signature=qJZ2hw3MLHCOF8FC497KGc4w~Y1zEiJSTIOAwlLWj5JoJgDb3OxyypvCE-AX7wMV2JTn5VdUS0NoVcdaRSYa4pvf5xieJnab9WnAqFs5wsPe7WGg-nHxZ9MkGhkCmAn7Bj~F1-BKB~B7KnJihCHCWpTUcqJE-M7UB8W8hG0IlJ9zTtbMFeV~E~4oAIE1MuiUDSmuInv536QkptOdXLk5YJ5b7O65WfI6CSLnrOwq43H1kp5c7DqjkSTA3ofhrrerLANh6VShgA2MhDbBpv0hMCrFi~uAT5BUbGDQtFc5zEfGl5pOK9GhtgHEXN9tStLcJzjPp3flSrSmrs-aBsYbJg__&Key-Pair-Id=K1676C64NMVM2J"
+    }
+  },
+  {
+    "id": "tripo_1449190f-c8c9-489b-a576-069c577420f8",
+    "prompt": "make a keyboard for the gaming",
+    "format": "glb",
+    "quality": "high",
+    "created_at": null,
+    "file_size": 1024000,
+    "status": "completed",
+    "download_url": null,
+    "tripo_task_id": "1449190f-c8c9-489b-a576-069c577420f8",
+    "output": {
+      "pbr_model": "https://tripo-data.rg1.data.tripo3d.com/tcli_48b1359dd3454c64b50f9bc9d295dc63/20250806/1449190f-c8c9-489b-a576-069c577420f8/tripo_pbr_model_1449190f-c8c9-489b-a576-069c577420f8.glb?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDhiMTM1OWRkMzQ1NGM2NGI1MGY5YmM5ZDI5NWRjNjMvMjAyNTA4MDYvMTQ0OTE5MGYtYzhjOS00ODliLWE1NzYtMDY5YzU3NzQyMGY4L3RyaXBvX3Bicl9tb2RlbF8xNDQ5MTkwZi1jOGM5LTQ4OWItYTU3Ni0wNjljNTc3NDIwZjguZ2xiIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzU0NTI0ODAwfX19XX0_&Signature=WhEJVr8WzypKGmYsjs3PW5cMHYZ2xPpA7SqENS3Sh5HJRUck1iS8ltD8~g-j4HtMUDXhrJ3mqnZHFpTbibjkIQNNatVGbSr17UnW0wW6tiOf28pey7D8u93aQRhIS2PdHrzIT50jXM4cdVrdsNk6so0VTjUMhLbB3nWHxFSAZL7Ha2vwiLdmBHgJcOGbuZ75GtN0tY2JiIit6Q4a6fVxtWJtjJ~i1bstXk7r5LOEJKcjx6ctC-Bh8X0tj~0N2cA0GBQJPl~5fXuAwgrA8cHnloj-9DN0qmkstGnGSmMcSSCdAqNwCSn643xM9mjznlr63-v~zIBS5AhVF9jCY1l2-Q__&Key-Pair-Id=K1676C64NMVM2J",
+      "generated_image": "https://tripo-data.rg1.data.tripo3d.com/tcli_48b1359dd3454c64b50f9bc9d295dc63/20250806/1449190f-c8c9-489b-a576-069c577420f8/im.webp?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDhiMTM1OWRkMzQ1NGM2NGI1MGY5YmM5ZDI5NWRjNjMvMjAyNTA4MDYvMTQ0OTE5MGYtYzhjOS00ODliLWE1NzYtMDY5YzU3NzQyMGY4L2ltLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3NTQ1MjQ4MDB9fX1dfQ__&Signature=R5fXMFCjzMFFrT4edpPeVpvs-7NhAq75STLE0gPxdbWuJjP2r6aTYZBs9CdvpBNrATKQAqXuSz4LJL0W8IsiDRJ0kNc7Xk5ojocggtVph5anaWANQtVvlTYxsSocykQV-Yryv2D3rJaT9Bbt-9ov3gprDcrkBRxK~pFz4mL6RCI0AjA4vq7JUQHUsU14EuUjjt1zHZzhNq-JFWyzCbA8vOjXaGQWlCQIgJVeKlMPVDnbsbqzlivkw00uC4MVnDvxniYI646yvXmaRAfyZSFE-0nC0biUSZBglTI53RnCM-XFrrp9GK2PFFJyvZkdfcAmrkKykojFTS2tYkyyrSXGsQ__&Key-Pair-Id=K1676C64NMVM2J",
+      "rendered_image": "https://tripo-data.rg1.data.tripo3d.com/tcli_48b1359dd3454c64b50f9bc9d295dc63/20250806/1449190f-c8c9-489b-a576-069c577420f8/legacy_mesh.webp?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDhiMTM1OWRkMzQ1NGM2NGI1MGY5YmM5ZDI5NWRjNjMvMjAyNTA4MDYvMTQ0OTE5MGYtYzhjOS00ODliLWE1NzYtMDY5YzU3NzQyMGY4L2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3NTQ1MjQ4MDB9fX1dfQ__&Signature=FcPNMoSO5bgQes631-i9up4vozM3ptNtPhAMwRQTvOtSzo-nzgaVFCuHhGwZLgbOh58qADjyxvE1Seh9LWay33C-C-mEv9xyYEjkg8Omnh9ivsNcSh~UQHtxACrmpjhArcagp0Qn7jXe4xXv8hgDybj4~9HOgfoeM4U2QsDoWv~Gjhc0LyKH8foaPVesCeeCPRrhh0FYf3-vfm0PTK0X8vxO5E~hedXBi2prPnQqWOdATBodngSSPnWc7esKNbLM~u3z4LeS~mEA0EZ5c2o-uOBOLrwkIWX1tZh-K137pWdL4Vah-YINqliwSlMQ5i0T0t5CnUBNV8Ty3MII6kZ~MA__&Key-Pair-Id=K1676C64NMVM2J"
+    }
+  },
+  {
+    "id": "tripo_14ed9c00-383b-43bd-b95f-782d564bf83e",
+    "prompt": "make the keyboard for the gaming",
+    "format": "glb",
+    "quality": "high",
+    "created_at": null,
+    "file_size": 1024000,
+    "status": "completed",
+    "download_url": null,
+    "tripo_task_id": "14ed9c00-383b-43bd-b95f-782d564bf83e",
+    "output": {
+      "pbr_model": "https://tripo-data.rg1.data.tripo3d.com/tcli_48b1359dd3454c64b50f9bc9d295dc63/20250806/14ed9c00-383b-43bd-b95f-782d564bf83e/tripo_pbr_model_14ed9c00-383b-43bd-b95f-782d564bf83e.glb?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDhiMTM1OWRkMzQ1NGM2NGI1MGY5YmM5ZDI5NWRjNjMvMjAyNTA4MDYvMTRlZDljMDAtMzgzYi00M2JkLWI5NWYtNzgyZDU2NGJmODNlL3RyaXBvX3Bicl9tb2RlbF8xNGVkOWMwMC0zODNiLTQzYmQtYjk1Zi03ODJkNTY0YmY4M2UuZ2xiIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzU0NTI0ODAwfX19XX0_&Signature=VoES2aTim-rmfhY-SEOmoDM3YCExr~4L8IfjYK-64VIZC9562KbDx9mpZZKW5cewSl5ALl2YlSCMhJdYGNMuutW0Ur-flA2psknSdtxsj3lkYRr1oinkhPobns1-BJwBPkTUeLslLaf6ONmS6toD304zXgrz9OXCOhbBdX-chakBtAQotbSxbmh6Xu0P~DEv056IxsQokmliGm9AIAm9o--68fgQSenv5Wny~y9hpOuoXe2~iksG1u2LxnyjmZhFGVmY65xoyeL2xs7fL4JzdVQjbcUxWkCp0uQBs1rUDZbuPpKWFpQwMbkx2~r~m1-7swpfagC~nY0CP-~f1LZESg__&Key-Pair-Id=K1676C64NMVM2J",
+      "generated_image": "https://tripo-data.rg1.data.tripo3d.com/tcli_48b1359dd3454c64b50f9bc9d295dc63/20250806/14ed9c00-383b-43bd-b95f-782d564bf83e/im.webp?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDhiMTM1OWRkMzQ1NGM2NGI1MGY5YmM5ZDI5NWRjNjMvMjAyNTA4MDYvMTRlZDljMDAtMzgzYi00M2JkLWI5NWYtNzgyZDU2NGJmODNlL2ltLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3NTQ1MjQ4MDB9fX1dfQ__&Signature=le-yJLiJSpQ88~zVkOnqOIujSvU1iqRL9q3uGOEvluK6mP397i1Ea6DqmyVfZbDj63vLVoojISDNAWLrE7W5oliAogbgm~rnsS3foN8omEOD5U-fmqVeLDTalN1QOCaZmTYHRZg5g6sz538Qhx3oQqHZjAQ2l7gP4IlejxFvprV9BLv2BSY9TuibbjJToYmiw1sT1RmlXUzX0eeRE3kV~s7ImLg5itwmC3efCB0k6cSWNWr78-bu7a4vg5opMNALaOdDofvLA33fqTJHTY6hU23THnIZ-Nd6Su-k9yrjKpcAic-jfFNqftcIxEAGEWbHusdPOQmVNWYVMF~Jal2GDw__&Key-Pair-Id=K1676C64NMVM2J",
+      "rendered_image": "https://tripo-data.rg1.data.tripo3d.com/tcli_48b1359dd3454c64b50f9bc9d295dc63/20250806/14ed9c00-383b-43bd-b95f-782d564bf83e/legacy_mesh.webp?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDhiMTM1OWRkMzQ1NGM2NGI1MGY5YmM5ZDI5NWRjNjMvMjAyNTA4MDYvMTRlZDljMDAtMzgzYi00M2JkLWI5NWYtNzgyZDU2NGJmODNlL2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3NTQ1MjQ4MDB9fX1dfQ__&Signature=vVW63UyH6L4Xw4RVUAymhLH4xtES5m5qmQ9QhDzb3qYyoeOuYJsU9O5yhzaxchdG6Q37KY8kmkLF7WFDbUQX1LoysY-3reUfCm4~dYnqkmf8O6yGVSaVoWJz07iztIOezKu6l9D57KwnOEV-U7YIId-7UmtPxEH8MM89VI9m08QO-eUdT-7DDIFIbjBVWRLXpi1oFH9FZvUBK-wvuunxfAgScsfJHzvuoUXJ3h9ukCq-U81Of-WvL9hcFKaJk7ksEbfuYYw06Aw8tBom74SqIkfOLwIyUJ4j4nMgcd7jQAVbaAnLNZ~0IJThjsu0Ty1F5IT6WXIGm~LYf2H1Gnzcpw__&Key-Pair-Id=K1676C64NMVM2J"
+    }
+  },
+  {
+    "id": "tripo_9bb4ae73-ff3f-40a8-b583-987680cd56df",
+    "prompt": "make the keyboard for the gaming",
+    "format": "glb",
+    "quality": "high",
+    "created_at": null,
+    "file_size": 1024000,
+    "status": "completed",
+    "download_url": null,
+    "tripo_task_id": "9bb4ae73-ff3f-40a8-b583-987680cd56df",
+    "output": {
+      "pbr_model": "https://tripo-data.rg1.data.tripo3d.com/tcli_48b1359dd3454c64b50f9bc9d295dc63/20250806/9bb4ae73-ff3f-40a8-b583-987680cd56df/tripo_pbr_model_9bb4ae73-ff3f-40a8-b583-987680cd56df.glb?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDhiMTM1OWRkMzQ1NGM2NGI1MGY5YmM5ZDI5NWRjNjMvMjAyNTA4MDYvOWJiNGFlNzMtZmYzZi00MGE4LWI1ODMtOTg3NjgwY2Q1NmRmL3RyaXBvX3Bicl9tb2RlbF85YmI0YWU3My1mZjNmLTQwYTgtYjU4My05ODc2ODBjZDU2ZGYuZ2xiIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzU0NTI0ODAwfX19XX0_&Signature=SmxS--qOIQQP3q0QeSzuTbTE34Jze6HoBNjjFcOf03fWtZi4OPD3jI9SKLiUc8aai0jCewjViKTy1s2gf33CSHjpYglW4u1dj~55yfs5A9r-XW33M~4Wf4axpbkRrIl-C7BwGkZG4XUyDR~YpejPuELJPWzulsiMQuto19~EoLScWO1j2CEfii~nW22PMUzh~rzIn9NWaWs1RtJ6HNtK~tJ4~qWaRSfTDICwjpHaswy~ceio4UEgAwr-J0zpHHzCQZY2NnNcfq36ZmP6efa5w5zyQ-auDBUr6bfMB70nyrTqSACg8DLe7TTmqWvrMfSzC31UxjcM5MFwoUCFI1~sRw__&Key-Pair-Id=K1676C64NMVM2J",
+      "generated_image": "https://tripo-data.rg1.data.tripo3d.com/tcli_48b1359dd3454c64b50f9bc9d295dc63/20250806/9bb4ae73-ff3f-40a8-b583-987680cd56df/im.webp?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDhiMTM1OWRkMzQ1NGM2NGI1MGY5YmM5ZDI5NWRjNjMvMjAyNTA4MDYvOWJiNGFlNzMtZmYzZi00MGE4LWI1ODMtOTg3NjgwY2Q1NmRmL2ltLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3NTQ1MjQ4MDB9fX1dfQ__&Signature=I8kUMXGc~Ln-ya13vLhC2dOH2i3EQQqCAbc4zf46EW9YMlMErwvhWb~8AC5cfEhmQzW203K3XR3mRXOzaiB2pKFQQKo2gT7kd3GOiiRdPRsrGpi7mlXdqRWLgYhSOmzqpw2wDe4JJhZAVrHnaG5j05SsjsT9vYP4hlyylpaw18rbu355r9DQNWQe4N0GlOIm4REn9cFacEMU7o7H4JnAUeOGsWsj9ZZ-iEiH6PNA9c3O0CZO-wtKvVNfOw6L88DOkskLc3fBF8RaqtIkBmdjtN8uPDqL4ceHLr3Jl~l4D3H7GTQjNIDRaEC5C3v6XgLaAanmVyhQxtQV3oHwhce2Ww__&Key-Pair-Id=K1676C64NMVM2J",
+      "rendered_image": "https://tripo-data.rg1.data.tripo3d.com/tcli_48b1359dd3454c64b50f9bc9d295dc63/20250806/9bb4ae73-ff3f-40a8-b583-987680cd56df/legacy_mesh.webp?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDhiMTM1OWRkMzQ1NGM2NGI1MGY5YmM5ZDI5NWRjNjMvMjAyNTA4MDYvOWJiNGFlNzMtZmYzZi00MGE4LWI1ODMtOTg3NjgwY2Q1NmRmL2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3NTQ1MjQ4MDB9fX1dfQ__&Signature=jAH6Gy-Sy6rAN9ZbtjxE0UtqvLxQgZUZ6VKhFxpzOYx13Md~LCw~AnrgqgY18Bo9hZg7d03c4k0CA2AtYhRC-gCOzO~PIsJ3fo0zFTTmAc8vhMc0f8sj7rMmDC3B3HemJgXZqnLBqTrnF3x0gJ5WCDIP4ZnpWIr394S9ZgO83sFqkK8nqXoxhdUFECvAUiojWnKAy1ErW2V7yg3psnniCt1l1bjrZeWmLFuQkkwTBMpSLQlasF5tjM5pzZ52-xeL5W1olMKrNmtOmPYFJIyJU89XgHmsE0-Vp~86pX~gGQr21J5El7QXUtMppuutbzpUrzuunIGY2FgeAxO4qLjWSg__&Key-Pair-Id=K1676C64NMVM2J"
+    }
+  },
+  {
+    "id": "tripo_7dac4a7c-48e8-427c-b7d7-633986d4a764",
+    "prompt": "A detailed 3D bumble bee character with realistic proportions, fuzzy yellow and black striped body, large compound eyes, transparent wings with visible veins, six articulated legs, small mandibles, realistic textures including fine hairs on the body, natural pose with wings slightly spread, soft natural lighting, photorealistic quality, suitable for close-up animation",
+    "format": "glb",
+    "quality": "high",
+    "created_at": null,
+    "file_size": 1024000,
+    "status": "completed",
+    "download_url": null,
+    "tripo_task_id": "7dac4a7c-48e8-427c-b7d7-633986d4a764",
+    "output": {
+      "pbr_model": "https://tripo-data.rg1.data.tripo3d.com/tcli_48b1359dd3454c64b50f9bc9d295dc63/20250806/7dac4a7c-48e8-427c-b7d7-633986d4a764/tripo_pbr_model_7dac4a7c-48e8-427c-b7d7-633986d4a764.glb?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDhiMTM1OWRkMzQ1NGM2NGI1MGY5YmM5ZDI5NWRjNjMvMjAyNTA4MDYvN2RhYzRhN2MtNDhlOC00MjdjLWI3ZDctNjMzOTg2ZDRhNzY0L3RyaXBvX3Bicl9tb2RlbF83ZGFjNGE3Yy00OGU4LTQyN2MtYjdkNy02MzM5ODZkNGE3NjQuZ2xiIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzU0NTI0ODAwfX19XX0_&Signature=d77rXXh7FCwPFQJh3hM68-nbzuepw21NzunzldipwhkoDFf9nhp11GODlUE1C-K~W-uIsWorSjnt2TCb92Zs76ckM8btBFWwFcswQCfdc6MmjGjp9moWKmmLx8H~qFYUVzXfDe0YhX2hy3Z02zSpu52mcgYSqLrs8-lF25tmNdUlIyYHVKJo5XjB0ahwx-TOAqTRasNqHYvRNcMsKxtnDAznBIkDHiogAUl990ef3nc~DLTuKGBPvuaqrb-nn5lvow-MN06PuyM5ge98B012YWAu0mZGnml9ph63QhsdozFZKsU~Hv47KYavY3WKmApmmDIA6plW6bnBAtZh-kZtow__&Key-Pair-Id=K1676C64NMVM2J",
+      "generated_image": "https://tripo-data.rg1.data.tripo3d.com/tcli_48b1359dd3454c64b50f9bc9d295dc63/20250806/7dac4a7c-48e8-427c-b7d7-633986d4a764/im.webp?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDhiMTM1OWRkMzQ1NGM2NGI1MGY5YmM5ZDI5NWRjNjMvMjAyNTA4MDYvN2RhYzRhN2MtNDhlOC00MjdjLWI3ZDctNjMzOTg2ZDRhNzY0L2ltLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3NTQ1MjQ4MDB9fX1dfQ__&Signature=dA~3EIoFIH~KnoxKvsXSCVFZ2nJBewBkerbu-9278QvF9fJyXuiiG~minbip1qRGDUSI~bsYekCy1UfpwRfs84kyddIikjBV1M4jE8fzomMlW6oKc0XulwA65RAtvR2upSFRlNmxahyJQikpN3ytEzEVmzJGgpbL8mqKeDbw9yKLmmJJG-Vdiq1uPUYZBnSxZVv~MAb-GsyaFje~lIWRHTfB7WXJU3cyhE8SEHUS6x23fdgGFBdhI7zJ5d7cq6NUUDfAbFrL~U3qMcqAeNbj5k8wNFdGWpo399WTkkYecBlzRQH8WrRVUtpEqT7NV6RHjOu0Vo0LjSR6exBoWavToA__&Key-Pair-Id=K1676C64NMVM2J",
+      "rendered_image": "https://tripo-data.rg1.data.tripo3d.com/tcli_48b1359dd3454c64b50f9bc9d295dc63/20250806/7dac4a7c-48e8-427c-b7d7-633986d4a764/legacy_mesh.webp?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDhiMTM1OWRkMzQ1NGM2NGI1MGY5YmM5ZDI5NWRjNjMvMjAyNTA4MDYvN2RhYzRhN2MtNDhlOC00MjdjLWI3ZDctNjMzOTg2ZDRhNzY0L2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3NTQ1MjQ4MDB9fX1dfQ__&Signature=XFe-bVctaGySsNNy3OTvgsZ20DFqOyAJzN6sghDMoONwUam8LIjeobmshuj8HCKtaw6o7ACxdBHO8f6ad5--CK6JEVqMnko~ruyYg~e9mq46Q9UGcNhCbsIWbt4o6taN8qxsef55S0at4EaTscFijtwlFzFFKAmCRtkBTNgQnJ~7uMTHYbsGhFbPg4TUFNFcgxJyhSRAHn~sYJ-V6WWZsZ3fMtbbsM-xsvJYwL~vANgs9OIN1bW6J6TZvWa7s6Xy-2zGXo7n-wbQqUp5WcI5yWfqWPyIOfiIVzCl13mQ3wPtVxs6Y9legGtxZ3PlRMWhXNU3hfK5WpFjFhRr8zJZZA__&Key-Pair-Id=K1676C64NMVM2J"
+    }
+  },
+  {
+    "id": "tripo_c2a1bbde-defb-44c0-b65d-bb93ce4d5f33",
+    "prompt": "A detailed 3D bumble bee character with realistic proportions, fuzzy yellow and black striped body, large compound eyes, transparent wings with visible veins, six articulated legs, small mandibles, realistic textures including fine hairs on the body, natural pose with wings slightly spread, soft natural lighting, photorealistic quality, suitable for close-up animation",
+    "format": "glb",
+    "quality": "high",
+    "created_at": null,
+    "file_size": 1024000,
+    "status": "completed",
+    "download_url": null,
+    "tripo_task_id": "c2a1bbde-defb-44c0-b65d-bb93ce4d5f33",
+    "output": {
+      "pbr_model": "https://tripo-data.rg1.data.tripo3d.com/tcli_48b1359dd3454c64b50f9bc9d295dc63/20250806/c2a1bbde-defb-44c0-b65d-bb93ce4d5f33/tripo_pbr_model_c2a1bbde-defb-44c0-b65d-bb93ce4d5f33.glb?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDhiMTM1OWRkMzQ1NGM2NGI1MGY5YmM5ZDI5NWRjNjMvMjAyNTA4MDYvYzJhMWJiZGUtZGVmYi00NGMwLWI2NWQtYmI5M2NlNGQ1ZjMzL3RyaXBvX3Bicl9tb2RlbF9jMmExYmJkZS1kZWZiLTQ0YzAtYjY1ZC1iYjkzY2U0ZDVmMzMuZ2xiIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzU0NTI0ODAwfX19XX0_&Signature=SQJNT6RZtHq6OCqKB00chUSSZQsILxbIuxi2nsluUrt4RnpfT1LZHQF2hcJ6mSuEYbpY2w2PttRJJHBuO5kreLXbZB6g3kVzb6aSVt~tWCw7RPI4sJTB03IO5dKlkKbUZSfsF1Iaaym86-yqz-7oSjPU0WZk8lQSmt6vQDF7JgOKw9w2JB~mTI05uL6Ccnk0jVpJbW0nZc6j3POXZ~cwe1qU5Pu8jA6a1UVI~P-jr2LiiHf8aQs1Hv48Kq7BvIng9~QtC6fHM3wJpdO0mxw3TO~-Ug3VzenFMpAK0noqtFMtvOhNad1ovEdsPOfZma6~TrvWkAX3glTQnjy25B0~3Q__&Key-Pair-Id=K1676C64NMVM2J",
+      "generated_image": "https://tripo-data.rg1.data.tripo3d.com/tcli_48b1359dd3454c64b50f9bc9d295dc63/20250806/c2a1bbde-defb-44c0-b65d-bb93ce4d5f33/im.webp?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDhiMTM1OWRkMzQ1NGM2NGI1MGY5YmM5ZDI5NWRjNjMvMjAyNTA4MDYvYzJhMWJiZGUtZGVmYi00NGMwLWI2NWQtYmI5M2NlNGQ1ZjMzL2ltLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3NTQ1MjQ4MDB9fX1dfQ__&Signature=fuzRYMxYyTHo21QxOcAqjXHRrw3GTpTDXlSrT6pu9-EwXhzz~JPiOnh8~ToDiWt7PpLh7HjFbLzPB9xmuQIwqZpQsYee~7vIORkn33wHSbaas-gna4ruzY8dS5ngSNdfJNQtM1krsHqXahKA~UvSGYsJwt2Z3L9Q5-WAxHSqZvnv2rU4p67CiJTIThu7XjfT5glBbbWW6FTOp95ck5o0h~lB4jGmm8dkzyDdpZoPINBktOJ4zT6nzIFyf60OnY0S0wISX2gTWeMhhNQuMlAL8cGI8tfiU6uDPTqZnwiQitd9jueZ1rN6VtBf6ZCBe7xJtFYWt0aLMKgED4dmes2i4g__&Key-Pair-Id=K1676C64NMVM2J",
+      "rendered_image": "https://tripo-data.rg1.data.tripo3d.com/tcli_48b1359dd3454c64b50f9bc9d295dc63/20250806/c2a1bbde-defb-44c0-b65d-bb93ce4d5f33/legacy_mesh.webp?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly90cmlwby1kYXRhLnJnMS5kYXRhLnRyaXBvM2QuY29tL3RjbGlfNDhiMTM1OWRkMzQ1NGM2NGI1MGY5YmM5ZDI5NWRjNjMvMjAyNTA4MDYvYzJhMWJiZGUtZGVmYi00NGMwLWI2NWQtYmI5M2NlNGQ1ZjMzL2xlZ2FjeV9tZXNoLndlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3NTQ1MjQ4MDB9fX1dfQ__&Signature=Eh7dDZmmSGoUY-JyuwsmEwPfhBi0NJ5sIZ3UrFHgfI8Sbz2mU7Jcjz04TIkJ12AJV5PA1RmNvKw83wSbNDc35HMgsgRDaihMJkdXL2HejyBYs54GP44-v9aQSkLN3YyPzA53lcef0aTFShVnKaIsch~i5oHpbVIr-EWVH1yx-AuwpsZE12WQ88OaAA4qH-k0YTNs6v04pZp~9T5ktmG~tqtr3IR0ww86QEhSVnzAWdPd4NntAyvD8udxvM0Unn0CqH~ybuEdb2yMaMUyq3ezWBemIRii-S1TeYnPNusmzEZEhJXokDo-ML9Ln103rwNGm5jL20jjYC3UBPZSgft0Vg__&Key-Pair-Id=K1676C64NMVM2J"
+    }
+  }
+]

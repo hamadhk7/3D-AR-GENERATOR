@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR Viewer Simple Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f0f0f0;
+        }
+        .test-panel {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .button:hover {
+            background: #0056b3;
+        }
+        .success {
+            color: #28a745;
+        }
+        .error {
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <h1>AR Viewer Simple Test</h1>
+    
+    <div class="test-panel">
+        <h3>Quick Tests</h3>
+        <button class="button" onclick="testModelData()">Test Model Data</button>
+        <button class="button" onclick="testARPage()">Test AR Page</button>
+        <button class="button" onclick="openARViewer()">Open AR Viewer</button>
+        <button class="button" onclick="openDebugPage()">Open Debug Page</button>
+    </div>
+    
+    <div class="test-panel">
+        <h3>Test Results</h3>
+        <div id="results"></div>
+    </div>
+
+    <script>
+        function log(message, type = 'info') {
+            const results = document.getElementById('results');
+            const timestamp = new Date().toLocaleTimeString();
+            const color = type === 'error' ? 'red' : type === 'success' ? 'green' : 'black';
+            results.innerHTML += `<div style="color: ${color}">[${timestamp}] ${message}</div>`;
+            console.log(message);
+        }
+        
+        async function testModelData() {
+            log('Testing model data...');
+            try {
+                const modelId = 'tripo_3f1ab50b-835b-49ea-82bc-e858c2734a13';
+                const response = await fetch(`/api/models/${modelId}`);
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.success && data.model) {
+                        log('✅ Model data loaded successfully', 'success');
+                        log(`   Prompt: ${data.model.prompt}`);
+                        log(`   Has GLB: ${data.model.output && data.model.output.pbr_model ? 'Yes' : 'No'}`);
+                    } else {
+                        log('❌ Invalid model data structure', 'error');
+                    }
+                } else {
+                    log(`❌ API error: ${response.status}`, 'error');
+                }
+            } catch (error) {
+                log(`❌ Error: ${error.message}`, 'error');
+            }
+        }
+        
+        async function testARPage() {
+            log('Testing AR page...');
+            try {
+                const modelId = 'tripo_3f1ab50b-835b-49ea-82bc-e858c2734a13';
+                const response = await fetch(`/models/${modelId}/ar`);
+                
+                if (response.ok) {
+                    log('✅ AR page loads successfully', 'success');
+                } else {
+                    log(`❌ AR page error: ${response.status}`, 'error');
+                }
+            } catch (error) {
+                log(`❌ Error: ${error.message}`, 'error');
+            }
+        }
+        
+        function openARViewer() {
+            const modelId = 'tripo_3f1ab50b-835b-49ea-82bc-e858c2734a13';
+            const url = `/models/${modelId}/ar`;
+            log(`Opening AR viewer: ${url}`);
+            window.open(url, '_blank');
+        }
+        
+        function openDebugPage() {
+            log('Opening debug page...');
+            window.open('/debug-ar', '_blank');
+        }
+        
+        // Auto-run basic tests
+        window.addEventListener('load', () => {
+            log('Page loaded, running basic tests...');
+            setTimeout(() => {
+                testModelData();
+                testARPage();
+            }, 1000);
+        });
+    </script>
+</body>
+</html> 

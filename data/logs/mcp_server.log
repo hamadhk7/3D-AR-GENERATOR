@@ -1,0 +1,16 @@
+{"asctime": "2025-08-06 17:26:29", "name": "mcp_server", "levelname": "INFO", "message": "Starting MCP server..."}
+{"asctime": "2025-08-06 17:26:29", "name": "mcp_server", "levelname": "INFO", "message": "Starting MCP server..."}
+{"asctime": "2025-08-06 17:26:29", "name": "mcp_server", "levelname": "INFO", "message": "Settings validated successfully"}
+{"asctime": "2025-08-06 17:26:29", "name": "mcp_server", "levelname": "ERROR", "message": "MCP server failed to start: 1 validation error for StdioServerParameters\ncommand\n  Field required [type=missing, input_value={'name': '3d-ar-demo', 'version': '1.0.0'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing"}
+{"asctime": "2025-08-06 17:27:33", "name": "mcp_server", "levelname": "INFO", "message": "Starting MCP server..."}
+{"asctime": "2025-08-06 17:27:33", "name": "mcp_server", "levelname": "INFO", "message": "Starting MCP server..."}
+{"asctime": "2025-08-06 17:27:33", "name": "mcp_server", "levelname": "INFO", "message": "Settings validated successfully"}
+{"asctime": "2025-08-06 17:27:33", "name": "mcp_server", "levelname": "ERROR", "message": "MCP server failed to start: NotificationOptions.__init__() got an unexpected keyword argument 'method'"}
+{"asctime": "2025-08-06 17:28:15", "name": "mcp_server", "levelname": "INFO", "message": "Starting MCP server..."}
+{"asctime": "2025-08-06 17:28:15", "name": "mcp_server", "levelname": "INFO", "message": "Starting MCP server..."}
+{"asctime": "2025-08-06 17:28:15", "name": "mcp_server", "levelname": "INFO", "message": "Settings validated successfully"}
+{"asctime": "2025-08-06 17:28:15", "name": "mcp_server", "levelname": "ERROR", "message": "MCP server failed to start: unhandled errors in a TaskGroup (2 sub-exceptions)"}
+{"asctime": "2025-08-06 17:28:23", "name": "mcp_server", "levelname": "INFO", "message": "Starting MCP server..."}
+{"asctime": "2025-08-06 17:28:23", "name": "mcp_server", "levelname": "INFO", "message": "Starting MCP server..."}
+{"asctime": "2025-08-06 17:28:23", "name": "mcp_server", "levelname": "INFO", "message": "Settings validated successfully"}
+{"asctime": "2025-08-06 17:28:23", "name": "mcp_server", "levelname": "ERROR", "message": "MCP server failed to start: unhandled errors in a TaskGroup (2 sub-exceptions)"}

@@ -1,0 +1,1389 @@
+{% extends "base.html" %}
+
+{% block title %}3D AR Demo - Home{% endblock %}
+
+{% block content %}
+<div class="container">
+        <!-- Hero Section -->
+    <!-- <div class="hero-section"> -->
+        <div class="hero-background">
+            <div class="floating-elements-hero">
+                <div class="floating-cube-hero"></div>
+                <div class="floating-sphere-hero"></div>
+                <div class="floating-pyramid-hero"></div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-3d-viewer mb-4">
+                    <div id="hero3DContainer"></div>
+                </div>
+                <h1 class="hero-title mb-4">
+                    Generate 3D Models
+                </h1>
+                <p class="hero-subtitle mb-4">
+                    Create stunning 3D models from text descriptions using advanced AI technology. 
+                    View them in augmented reality and explore endless possibilities.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#generator" class="hero-btn-primary">
+                        <i class="fas fa-magic"></i>
+                        Start Creating
+                    </a>
+                    <a href="{{ url_for('ar_viewer') }}" class="hero-btn-secondary">
+                        <i class="fas fa-vr-cardboard"></i>
+                        AR Viewer
+                    </a>
+                </div>
+            </div>
+        <!-- </div>
+    </div> -->
+
+    <!-- Model Generator Section -->
+    <div id="generator" class="generator-section">
+        <div class="generator-background">
+            <div class="floating-elements">
+                <div class="floating-cube"></div>
+                <div class="floating-sphere"></div>
+                <div class="floating-pyramid"></div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="generator-content">
+                        <div class="text-center mb-5">
+                            <div class="generator-icon mb-4">
+                                <i class="fas fa-magic"></i>
+                            </div>
+                            <h2 class="generator-title mb-3">
+                                Generate Your 3D Model
+                            </h2>
+                            <p class="generator-subtitle">Transform your ideas into stunning 3D reality</p>
+                        </div>
+                        
+                        <form id="generationForm" data-ajax action="/api/generate" method="POST" class="generator-form">
+                            <div class="form-group mb-4">
+                                <label for="prompt" class="form-label">
+                                    <i class="fas fa-pen"></i>
+                                    Describe your 3D model
+                                </label>
+                                <textarea 
+                                    class="form-control" 
+                                    id="prompt" 
+                                    name="prompt" 
+                                    rows="4" 
+                                    placeholder="Describe the 3D model you want to generate. Be specific about details, style, and materials..."
+                                    required
+                                ></textarea>
+                                <div class="form-tip">
+                                    <i class="fas fa-lightbulb"></i>
+                                    Tip: Be descriptive! Include details about style, materials, colors, and mood.
+                                </div>
+                            </div>
+                            
+                            <div class="form-row mb-4">
+                                <div class="form-col">
+                                    <label for="format" class="form-label">
+                                        <i class="fas fa-file"></i>
+                                        Output Format
+                                    </label>
+                                    <select class="form-select" id="format" name="format">
+                                        <option value="glb">GLB (Recommended)</option>
+                                        <option value="usdz">USDZ (iOS AR)</option>
+                                        <option value="obj">OBJ (Universal)</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-col">
+                                    <label for="quality" class="form-label">
+                                        <i class="fas fa-star"></i>
+                                        Quality
+                                    </label>
+                                    <select class="form-select" id="quality" name="quality">
+                                        <option value="high">High Quality</option>
+                                        <option value="medium">Medium Quality</option>
+                                        <option value="low">Low Quality (Faster)</option>
+                                        <option value="ultra">Ultra Quality (Slower)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group mb-4">
+                                <label for="negative_prompt" class="form-label">
+                                    <i class="fas fa-ban"></i>
+                                    Negative Prompt (Optional)
+                                </label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="negative_prompt" 
+                                    name="negative_prompt" 
+                                    placeholder="What you DON'T want in your model..."
+                                >
+                                <div class="form-tip">
+                                    Specify elements you want to avoid in the generation.
+                                </div>
+                            </div>
+                            
+                            <div class="text-center">
+                                <button type="submit" class="generate-button" id="generateBtn">
+                                    <i class="fas fa-magic"></i>
+                                    <span id="generateBtnText">Generate Model</span>
+                                </button>
+                                <div id="generationProgress" class="progress-container" style="display: none;">
+                                    <div class="progress-bar-container">
+                                        <div id="progressBar" class="progress-fill" style="width: 0%">
+                                            <span id="progressText">0%</span>
+                                        </div>
+                                    </div>
+                                    <div class="progress-status" id="progressStatus">Initializing generation...</div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Models Section -->
+    <div class="models-section">
+        <div class="models-background">
+            <div class="floating-elements-models">
+                <div class="floating-cube-models"></div>
+                <div class="floating-sphere-models"></div>
+                <div class="floating-pyramid-models"></div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="models-content">
+                <div class="text-center mb-5">
+                    <div class="models-icon mb-4">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h2 class="models-title mb-3">
+                        Recently Generated Models
+                    </h2>
+                    <p class="models-subtitle">Explore your latest creations</p>
+                </div>
+                
+                <div id="recentModels" class="models-grid">
+                    <!-- Models will be loaded here -->
+                    <div class="loading-container">
+                        <div class="loading-spinner">
+                            <div class="spinner"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-5">
+                    <a href="{{ url_for('models.list_models') }}" class="view-all-button">
+                        <i class="fas fa-list"></i>
+                        View All Models
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="row justify-content-center mb-5">
+        <div class="col-lg-12">
+            <div class="text-center mb-5">
+                <h2 class="h2 mb-3">Why Choose Our Platform?</h2>
+                <p class="text-muted">Discover the power of AI-driven 3D generation</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 p-4 text-center feature-card">
+                        <div class="feature-icon-wrapper mb-4">
+                            <i class="fas fa-magic"></i>
+                        </div>
+                        <h4 class="h5 mb-3">AI-Powered Generation</h4>
+                        <p class="text-muted">
+                            Advanced AI models create high-quality 3D models from your text descriptions with incredible detail and accuracy.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card h-100 p-4 text-center feature-card">
+                        <div class="feature-icon-wrapper mb-4">
+                            <i class="fas fa-vr-cardboard"></i>
+                        </div>
+                        <h4 class="h5 mb-3">AR Visualization</h4>
+                        <p class="text-muted">
+                            View your models in augmented reality with our advanced AR viewer. Experience your creations in the real world.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card h-100 p-4 text-center feature-card">
+                        <div class="feature-icon-wrapper mb-4">
+                            <i class="fas fa-download"></i>
+                        </div>
+                        <h4 class="h5 mb-3">Multiple Formats</h4>
+                        <p class="text-muted">
+                            Export in GLB, USDZ, and OBJ formats for compatibility with various platforms and applications.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Hero Section - SICK DESIGN */
+    .hero-section {
+        position: relative;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+        overflow: hidden;
+        margin-top: 2rem;
+        border-radius: 30px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+    
+    .hero-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+    }
+    
+    .floating-elements-hero {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .floating-cube-hero {
+        position: absolute;
+        top: 20%;
+        left: 15%;
+        width: 80px;
+        height: 80px;
+        background: rgba(255, 255, 255, 0.1);
+        transform: rotate(45deg);
+        animation: floatCubeHero 10s ease-in-out infinite;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .floating-sphere-hero {
+        position: absolute;
+        top: 30%;
+        right: 20%;
+        width: 100px;
+        height: 100px;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+        border-radius: 50%;
+        animation: floatSphereHero 7s ease-in-out infinite;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .floating-pyramid-hero {
+        position: absolute;
+        bottom: 25%;
+        left: 25%;
+        width: 0;
+        height: 0;
+        border-left: 40px solid transparent;
+        border-right: 40px solid transparent;
+        border-bottom: 60px solid rgba(255, 255, 255, 0.1);
+        animation: floatPyramidHero 12s ease-in-out infinite;
+        backdrop-filter: blur(10px);
+    }
+    
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        padding: 6rem 2rem;
+        color: white;
+        text-align: center;
+    }
+    
+    .hero-3d-viewer {
+        width: 200px;
+        height: 200px;
+        margin: 0 auto;
+        position: relative;
+    }
+    
+    #hero3DContainer {
+        width: 100%;
+        height: 100%;
+        border-radius: 20px;
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        position: relative;
+    }
+    
+    #hero3DContainer canvas {
+        display: block;
+        width: 100% !important;
+        height: 100% !important;
+    }
+    
+    .hero-title {
+        font-size: 4.5rem;
+        font-weight: 900;
+        background: linear-gradient(45deg, #fff, #f0f0f0, #fff);
+        background-size: 200% 200%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: shimmer 3s infinite;
+        margin-bottom: 1.5rem;
+        line-height: 1.2;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.5rem;
+        color: rgba(255, 255, 255, 0.8);
+        font-weight: 300;
+        line-height: 1.6;
+        max-width: 800px;
+        margin: 0 auto 3rem;
+    }
+    
+    .hero-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        flex-wrap: wrap;
+    }
+    
+    .hero-btn-primary {
+        background: linear-gradient(45deg, #ff6b6b, #ee5a24, #ff6b6b);
+        background-size: 200% 200%;
+        border: none;
+        border-radius: 50px;
+        color: white;
+        padding: 1.5rem 3rem;
+        font-size: 1.3rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        animation: gradientShift 3s ease infinite;
+        box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-decoration: none;
+        min-width: 220px;
+        justify-content: center;
+    }
+    
+    .hero-btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(255, 107, 107, 0.6);
+        animation: none;
+        color: white;
+        text-decoration: none;
+    }
+    
+    .hero-btn-secondary {
+        background: rgba(255, 255, 255, 0.1);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50px;
+        color: white;
+        padding: 1.5rem 3rem;
+        font-size: 1.3rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-decoration: none;
+        min-width: 220px;
+        justify-content: center;
+        backdrop-filter: blur(10px);
+    }
+    
+    .hero-btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.5);
+        transform: translateY(-3px);
+        color: white;
+        text-decoration: none;
+        box-shadow: 0 15px 40px rgba(255, 255, 255, 0.2);
+    }
+    
+    /* Hero Animations */
+    @keyframes floatCubeHero {
+        0%, 100% {
+            transform: rotate(45deg) translateY(0px);
+        }
+        50% {
+            transform: rotate(45deg) translateY(-25px);
+        }
+    }
+    
+    @keyframes floatSphereHero {
+        0%, 100% {
+            transform: translateY(0px) scale(1);
+        }
+        50% {
+            transform: translateY(-20px) scale(1.1);
+        }
+    }
+    
+    @keyframes floatPyramidHero {
+        0%, 100% {
+            transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+            transform: translateY(-30px) rotate(180deg);
+        }
+    }
+    
+    @keyframes glowHero {
+        from {
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+        to {
+            text-shadow: 0 0 25px rgba(255, 255, 255, 0.8), 0 0 35px rgba(255, 255, 255, 0.6);
+        }
+    }
+    
+    /* Generator Section Styles */
+    .generator-card {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9));
+        border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+    
+    .generator-icon {
+        font-size: 3rem;
+        color: #667eea;
+        animation: float 3s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+    }
+    
+    .generate-btn {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        font-size: 1.1rem;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        transition: all 0.3s ease;
+        color: white !important;
+        text-decoration: none;
+        display: inline-block;
+    }
+    
+    .generate-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 20px 40px rgba(99, 102, 241, 0.4);
+        color: white !important;
+        text-decoration: none;
+    }
+    
+    .progress-lg {
+        border-radius: 15px;
+        background: rgba(255, 255, 255, 0.15);
+    }
+    
+    /* Models Section Styles */
+    .models-card {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9));
+        border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+    
+    .models-icon {
+        font-size: 3rem;
+        color: #667eea;
+        animation: bounce 2s ease-in-out infinite;
+    }
+    
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+        40% { transform: translateY(-10px); }
+        60% { transform: translateY(-5px); }
+    }
+    
+    .loading-spinner-lg {
+        padding: 3rem 0;
+    }
+    
+    /* Feature Cards Styles */
+    .feature-card {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9));
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .feature-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+        transition: left 0.6s;
+    }
+    
+    .feature-card:hover::before {
+        left: 100%;
+    }
+    
+    .feature-card:hover {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
+    }
+    
+    .feature-icon-wrapper {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        color: white;
+        transition: all 0.3s ease;
+    }
+    
+    .feature-card:hover .feature-icon-wrapper {
+        transform: scale(1.1);
+        background: linear-gradient(135deg, #8b5cf6, #a855f7);
+    }
+    
+    /* Model Card Enhancements */
+    .model-card {
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s ease;
+    }
+    
+    .model-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #667eea, #764ba2, #667eea);
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+    }
+    
+    .model-card:hover::before {
+        transform: scaleX(1);
+    }
+    
+    .model-card:hover {
+        transform: translateY(-10px) scale(1.03);
+        box-shadow: 0 25px 70px rgba(0, 0, 0, 0.25);
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .hero-icon {
+            font-size: 3rem;
+        }
+        
+        .hero-title {
+            font-size: 2.5rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.1rem;
+        }
+        
+        .hero-buttons {
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .hero-btn {
+            min-width: 250px;
+            margin-bottom: 1rem;
+        }
+        
+        .generator-icon,
+        .models-icon {
+            font-size: 2.5rem;
+        }
+        
+        .feature-icon-wrapper {
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+        }
+    }
+    
+    /* Generator Section - SICK DESIGN */
+    .generator-section {
+        position: relative;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+        overflow: hidden;
+        margin: 4rem 0;
+        border-radius: 30px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+    
+    .generator-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+    }
+    
+    .floating-elements {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .floating-cube {
+        position: absolute;
+        top: 10%;
+        left: 10%;
+        width: 60px;
+        height: 60px;
+        background: rgba(255, 255, 255, 0.1);
+        transform: rotate(45deg);
+        animation: floatCube 8s ease-in-out infinite;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .floating-sphere {
+        position: absolute;
+        top: 20%;
+        right: 15%;
+        width: 80px;
+        height: 80px;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+        border-radius: 50%;
+        animation: floatSphere 6s ease-in-out infinite;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .floating-pyramid {
+        position: absolute;
+        bottom: 15%;
+        left: 20%;
+        width: 0;
+        height: 0;
+        border-left: 30px solid transparent;
+        border-right: 30px solid transparent;
+        border-bottom: 50px solid rgba(255, 255, 255, 0.1);
+        animation: floatPyramid 10s ease-in-out infinite;
+        backdrop-filter: blur(10px);
+    }
+    
+    .generator-content {
+        position: relative;
+        z-index: 2;
+        padding: 4rem 2rem;
+        color: white;
+    }
+    
+    .generator-icon {
+        font-size: 4rem;
+        color: rgba(255, 255, 255, 0.9);
+        animation: glow 2s ease-in-out infinite alternate;
+    }
+    
+    .generator-title {
+        font-size: 3.5rem;
+        font-weight: 800;
+        background: linear-gradient(45deg, #fff, #f0f0f0, #fff);
+        background-size: 200% 200%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: shimmer 3s infinite;
+        margin-bottom: 1rem;
+    }
+    
+    .generator-subtitle {
+        font-size: 1.3rem;
+        color: rgba(255, 255, 255, 0.8);
+        font-weight: 300;
+    }
+    
+    .generator-form {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    
+    .form-group {
+        margin-bottom: 2rem;
+    }
+    
+    .form-row {
+        display: flex;
+        gap: 2rem;
+        margin-bottom: 2rem;
+    }
+    
+    .form-col {
+        flex: 1;
+    }
+    
+    .form-label {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+    }
+    
+    .form-control, .form-select {
+        background: rgba(255, 255, 255, 0.1);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        color: white;
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
+    }
+    
+    .form-control:focus, .form-select:focus {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.5);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        outline: none;
+    }
+    
+    .form-control::placeholder {
+        color: rgba(255, 255, 255, 0.6);
+    }
+    
+    .form-tip {
+        margin-top: 0.5rem;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .generate-button {
+        background: linear-gradient(45deg, #ff6b6b, #ee5a24, #ff6b6b);
+        background-size: 200% 200%;
+        border: none;
+        border-radius: 50px;
+        color: white;
+        padding: 1.5rem 3rem;
+        font-size: 1.2rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        animation: gradientShift 3s ease infinite;
+        box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .generate-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(255, 107, 107, 0.6);
+        animation: none;
+    }
+    
+    .progress-container {
+        margin-top: 2rem;
+    }
+    
+    .progress-bar-container {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 25px;
+        height: 30px;
+        overflow: hidden;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .progress-fill {
+        background: linear-gradient(45deg, #00d4aa, #00b894, #00d4aa);
+        height: 100%;
+        border-radius: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 700;
+        transition: width 0.3s ease;
+        animation: gradientShift 2s ease infinite;
+    }
+    
+    .progress-status {
+        margin-top: 1rem;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.9rem;
+    }
+    
+    /* New Animations */
+    @keyframes floatCube {
+        0%, 100% {
+            transform: rotate(45deg) translateY(0px);
+        }
+        50% {
+            transform: rotate(45deg) translateY(-20px);
+        }
+    }
+    
+    @keyframes floatSphere {
+        0%, 100% {
+            transform: translateY(0px) scale(1);
+        }
+        50% {
+            transform: translateY(-15px) scale(1.1);
+        }
+    }
+    
+    @keyframes floatPyramid {
+        0%, 100% {
+            transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+            transform: translateY(-25px) rotate(180deg);
+        }
+    }
+    
+    @keyframes glow {
+        from {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        to {
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.6);
+        }
+    }
+    
+    @keyframes gradientShift {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+    
+    /* Models Section - SICK DESIGN */
+    .models-section {
+        position: relative;
+        min-height: 80vh;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+        overflow: hidden;
+        margin: 4rem 0;
+        border-radius: 30px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+    
+    .models-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+    }
+    
+    .floating-elements-models {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .floating-cube-models {
+        position: absolute;
+        top: 15%;
+        right: 10%;
+        width: 50px;
+        height: 50px;
+        background: rgba(255, 255, 255, 0.1);
+        transform: rotate(45deg);
+        animation: floatCubeModels 12s ease-in-out infinite;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .floating-sphere-models {
+        position: absolute;
+        top: 25%;
+        left: 15%;
+        width: 70px;
+        height: 70px;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+        border-radius: 50%;
+        animation: floatSphereModels 8s ease-in-out infinite;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .floating-pyramid-models {
+        position: absolute;
+        bottom: 20%;
+        right: 20%;
+        width: 0;
+        height: 0;
+        border-left: 25px solid transparent;
+        border-right: 25px solid transparent;
+        border-bottom: 40px solid rgba(255, 255, 255, 0.1);
+        animation: floatPyramidModels 15s ease-in-out infinite;
+        backdrop-filter: blur(10px);
+    }
+    
+    .models-content {
+        position: relative;
+        z-index: 2;
+        padding: 4rem 2rem;
+        color: white;
+    }
+    
+    .models-icon {
+        font-size: 4rem;
+        color: rgba(255, 255, 255, 0.9);
+        animation: glowModels 2s ease-in-out infinite alternate;
+    }
+    
+    .models-title {
+        font-size: 3.5rem;
+        font-weight: 800;
+        background: linear-gradient(45deg, #fff, #f0f0f0, #fff);
+        background-size: 200% 200%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: shimmer 3s infinite;
+        margin-bottom: 1rem;
+    }
+    
+    .models-subtitle {
+        font-size: 1.3rem;
+        color: rgba(255, 255, 255, 0.8);
+        font-weight: 300;
+    }
+    
+    .models-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin: 3rem 0;
+    }
+    
+    .model-card {
+        background: rgba(255, 255, 255, 0.1);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        border-radius: 20px;
+        padding: 2rem;
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .model-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+        transition: left 0.6s;
+    }
+    
+    .model-card:hover::before {
+        left: 100%;
+    }
+    
+    .model-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.4);
+    }
+    
+    .model-card .fa-cube {
+        font-size: 2.5rem;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 1rem;
+        display: block;
+    }
+    
+    .model-card h6 {
+        color: white;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+    }
+    
+    .model-card p {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.9rem;
+        margin: 0;
+    }
+    
+    .loading-container {
+        grid-column: 1 / -1;
+        text-align: center;
+        padding: 3rem 0;
+    }
+    
+    .loading-spinner {
+        display: inline-block;
+        position: relative;
+        width: 80px;
+        height: 80px;
+    }
+    
+    .spinner {
+        position: absolute;
+        width: 64px;
+        height: 64px;
+        border: 8px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: rgba(255, 255, 255, 0.9);
+        animation: spin 1s linear infinite;
+    }
+    
+    .view-all-button {
+        background: linear-gradient(45deg, #ff6b6b, #ee5a24, #ff6b6b);
+        background-size: 200% 200%;
+        border: none;
+        border-radius: 50px;
+        color: white;
+        padding: 1.2rem 2.5rem;
+        font-size: 1.1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        animation: gradientShift 3s ease infinite;
+        box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-decoration: none;
+    }
+    
+    .view-all-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(255, 107, 107, 0.6);
+        animation: none;
+        color: white;
+        text-decoration: none;
+    }
+    
+    /* Models Animations */
+    @keyframes floatCubeModels {
+        0%, 100% {
+            transform: rotate(45deg) translateY(0px);
+        }
+        50% {
+            transform: rotate(45deg) translateY(-15px);
+        }
+    }
+    
+    @keyframes floatSphereModels {
+        0%, 100% {
+            transform: translateY(0px) scale(1);
+        }
+        50% {
+            transform: translateY(-12px) scale(1.05);
+        }
+    }
+    
+    @keyframes floatPyramidModels {
+        0%, 100% {
+            transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+            transform: translateY(-20px) rotate(90deg);
+        }
+    }
+    
+    @keyframes glowModels {
+        from {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        to {
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.6);
+        }
+    }
+    
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    
+    /* Responsive Design for Generator */
+    @media (max-width: 768px) {
+        .generator-title {
+            font-size: 2.5rem;
+        }
+        
+        .form-row {
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .generator-content {
+            padding: 2rem 1rem;
+        }
+        
+        .generate-button {
+            padding: 1.2rem 2rem;
+            font-size: 1rem;
+        }
+        
+        .models-title {
+            font-size: 2.5rem;
+        }
+        
+        .models-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        .models-content {
+            padding: 2rem 1rem;
+        }
+        
+        .view-all-button {
+            padding: 1rem 2rem;
+            font-size: 1rem;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+        }
+        
+        .hero-buttons {
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .hero-btn-primary,
+        .hero-btn-secondary {
+            min-width: 280px;
+            padding: 1.2rem 2rem;
+            font-size: 1.1rem;
+        }
+        
+        .hero-content {
+            padding: 4rem 1rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Load recent models and credit status
+    loadRecentModels();
+    loadCreditStatus();
+    
+    // Add scroll animations
+    addScrollAnimations();
+    
+    // Load 3D bee model in hero section
+    loadHero3DModel();
+});
+
+function loadHero3DModel() {
+    const container = document.getElementById('hero3DContainer');
+    if (!container) {
+        console.error('Hero 3D container not found');
+        return;
+    }
+    
+    console.log('Starting 3D model loading...');
+    
+    // Test if Three.js is available
+    if (typeof THREE === 'undefined') {
+        console.error('Three.js is not loaded!');
+        container.innerHTML = '<i class="fas fa-cube" style="font-size: 4rem; color: rgba(255, 255, 255, 0.9); display: flex; align-items: center; justify-content: center; height: 100%;"></i>';
+        return;
+    }
+    
+    console.log('Three.js is available:', THREE.REVISION);
+    
+    // Create Three.js scene
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    
+    renderer.setSize(200, 200);
+    renderer.setClearColor(0x000000, 0);
+    container.appendChild(renderer.domElement);
+    
+    console.log('Three.js scene created successfully');
+    console.log('Renderer canvas added to container');
+    
+    // Add lighting
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+    scene.add(ambientLight);
+    
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+    directionalLight.position.set(5, 5, 5);
+    scene.add(directionalLight);
+    
+    // Create a simple animated cube instead of loading the corrupted GLB file
+    console.log('Creating animated 3D cube...');
+    
+    // Create a simple cube geometry
+    const geometry = new THREE.BoxGeometry(3, 3, 3);
+    const material = new THREE.MeshPhongMaterial({ 
+        color: 0xff4444,
+        transparent: true,
+        opacity: 0.8,
+        shininess: 100
+    });
+    const cube = new THREE.Mesh(geometry, material);
+    
+    scene.add(cube);
+    
+    // Position camera
+    camera.position.z = 5;
+    
+    // Animation loop
+    function animate() {
+        requestAnimationFrame(animate);
+        
+        // Rotate the cube
+        cube.rotation.x += 0.01;
+        cube.rotation.y += 0.01;
+        
+        renderer.render(scene, camera);
+    }
+    
+    animate();
+    console.log('Animated 3D cube created successfully!');
+}
+
+function loadRecentModels() {
+    fetch('/api/models?limit=6')
+        .then(response => response.json())
+        .then(data => {
+            const container = document.getElementById('recentModels');
+            
+            if (data.models && data.models.length > 0) {
+                container.innerHTML = data.models.map((model, index) => `
+                    <div class="model-card" onclick="viewModel('${model.id}')" style="animation-delay: ${index * 0.1}s;">
+                        <i class="fas fa-cube"></i>
+                        <h6>${model.prompt.substring(0, 50)}${model.prompt.length > 50 ? '...' : ''}</h6>
+                        <p>
+                            <i class="fas fa-file"></i> ${model.format.toUpperCase()}
+                            <br>
+                            <i class="fas fa-calendar"></i> ${new Date(model.created_at).toLocaleDateString()}
+                        </p>
+                    </div>
+                `).join('');
+            } else {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-cube" style="font-size: 3rem; color: rgba(255, 255, 255, 0.6); margin-bottom: 1rem;"></i>
+                        <p style="color: rgba(255, 255, 255, 0.8);">No models generated yet. Create your first model above!</p>
+                    </div>
+                `;
+            }
+        })
+        .catch(error => {
+            console.error('Error loading models:', error);
+            document.getElementById('recentModels').innerHTML = `
+                <div class="error-state">
+                    <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: rgba(255, 255, 255, 0.6); margin-bottom: 1rem;"></i>
+                    <p style="color: rgba(255, 255, 255, 0.8);">Failed to load models</p>
+                </div>
+            `;
+        });
+}
+
+function viewModel(modelId) {
+    window.location.href = `/view/${modelId}`;
+}
+
+function loadCreditStatus() {
+    fetch('/api/credits')
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const apiWalletEl = document.getElementById('apiWallet');
+                const freeWalletEl = document.getElementById('freeWallet');
+                const totalUsedEl = document.getElementById('totalUsed');
+                const creditNoteEl = document.getElementById('creditNote');
+                
+                if (apiWalletEl) apiWalletEl.textContent = data.api_wallet;
+                if (freeWalletEl) freeWalletEl.textContent = data.free_wallet;
+                if (totalUsedEl) totalUsedEl.textContent = data.total_used;
+                if (creditNoteEl) creditNoteEl.textContent = data.note || 'Credit information loaded';
+            } else {
+                const creditNoteEl = document.getElementById('creditNote');
+                if (creditNoteEl) creditNoteEl.textContent = 'Failed to load credit information';
+            }
+        })
+        .catch(error => {
+            console.error('Error loading credit status:', error);
+            const creditNoteEl = document.getElementById('creditNote');
+            if (creditNoteEl) creditNoteEl.textContent = 'Error loading credit information';
+        });
+}
+
+function addScrollAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+    
+    // Observe all cards and sections
+    document.querySelectorAll('.card, .hero-content, .generator-card, .models-card, .feature-card').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'all 0.6s ease';
+        observer.observe(el);
+    });
+}
+</script>
+{% endblock %} 

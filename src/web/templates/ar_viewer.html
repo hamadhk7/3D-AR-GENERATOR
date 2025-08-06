@@ -1,0 +1,832 @@
+{% extends "base.html" %}
+{% block title %}AR Viewer - 3D AR Demo{% endblock %}
+
+{% block extra_css %}
+<style>
+    body {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+    }
+    
+    .ar-container {
+        height: 85vh; /* Increased from 75vh to give more space */
+        border: 3px solid rgba(255,255,255,0.2);
+        border-radius: 20px;
+        margin: 20px 0;
+        position: relative;
+        background: linear-gradient(145deg, #1a1a2e, #16213e);
+        overflow: hidden;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        backdrop-filter: blur(10px);
+    }
+    
+    .ar-overlay {
+        position: absolute;
+        top: 30px;
+        left: 30px;
+        right: 30px;
+        z-index: 1000;
+        color: white;
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+    }
+    
+    .ar-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+        background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .ar-subtitle {
+        font-size: 1.1rem;
+        opacity: 0.9;
+        margin-bottom: 20px;
+    }
+    
+    .ar-controls {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1000;
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .ar-button {
+        background: linear-gradient(45deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
+        border: 2px solid rgba(255,255,255,0.3);
+        color: white;
+        padding: 15px 25px;
+        border-radius: 50px;
+        cursor: pointer;
+        backdrop-filter: blur(15px);
+        transition: all 0.3s ease;
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+    
+    .ar-button:hover {
+        background: linear-gradient(45deg, rgba(255,255,255,0.3), rgba(255,255,255,0.2));
+        border-color: rgba(255,255,255,0.8);
+        transform: translateY(-2px);
+        box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    }
+    
+    .ar-button.primary {
+        background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+        border-color: #ff6b6b;
+    }
+    
+    .ar-button.primary:hover {
+        background: linear-gradient(45deg, #ee5a24, #ff6b6b);
+        transform: translateY(-3px);
+        box-shadow: 0 15px 45px rgba(255,107,107,0.4);
+    }
+    
+    .ar-instructions {
+        background: rgba(255,255,255,0.1);
+        color: white;
+        padding: 25px;
+        border-radius: 15px;
+        margin-bottom: 25px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.2);
+    }
+    
+    .device-check {
+        background: rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.2);
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 25px;
+        backdrop-filter: blur(10px);
+        color: white;
+    }
+    
+    .device-check.success {
+        background: rgba(76, 175, 80, 0.2);
+        border-color: rgba(76, 175, 80, 0.5);
+    }
+    
+    .device-check.warning {
+        background: rgba(255, 193, 7, 0.2);
+        border-color: rgba(255, 193, 7, 0.5);
+    }
+    
+    .ar-viewer-content {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end; /* Changed from center to flex-end to position at bottom */
+        height: 100%;
+        color: white;
+        text-align: center;
+        padding-bottom: 100px; /* Add bottom padding to lift content from very bottom */
+    }
+    
+    .ar-ready-icon {
+        font-size: 6rem;
+        margin-bottom: 30px;
+        background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+    }
+    
+    .ar-ready-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 15px;
+        background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .ar-ready-subtitle {
+        font-size: 1.2rem;
+        opacity: 0.8;
+        margin-bottom: 30px;
+    }
+    
+    .ar-features {
+        background: rgba(255,255,255,0.1);
+        border-radius: 15px;
+        padding: 25px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.2);
+    }
+    
+    .feature-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+        padding: 10px;
+        border-radius: 10px;
+        background: rgba(255,255,255,0.05);
+        transition: all 0.3s ease;
+    }
+    
+    .feature-item:hover {
+        background: rgba(255,255,255,0.1);
+        transform: translateX(5px);
+    }
+    
+    .feature-icon {
+        font-size: 1.5rem;
+        margin-right: 15px;
+        color: #4ecdc4;
+    }
+    
+    .model-info-badge {
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        display: inline-block;
+        margin-bottom: 20px;
+    }
+    
+    /* Responsive design */
+    @media (max-width: 768px) {
+        .ar-container {
+            height: 70vh; /* Increased from 60vh */
+        }
+        
+        .ar-controls {
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .ar-button {
+            width: 200px;
+        }
+        
+        .ar-title {
+            font-size: 2rem;
+        }
+        
+        .ar-ready-title {
+            font-size: 2rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ url_for('index') }}" style="color: white;">Home</a></li>
+                    <li class="breadcrumb-item active" style="color: rgba(255,255,255,0.8);">AR Viewer</li>
+                </ol>
+            </nav>
+            
+            <div class="ar-instructions">
+                <h3><i class="fas fa-vr-cardboard"></i> AR Viewer Experience</h3>
+                <p>Experience your 3D models in stunning Augmented Reality. This viewer supports both AR Quick Look (iOS) and WebXR (Android/Web) for an immersive experience.</p>
+            </div>
+            
+            <div class="device-check" id="deviceCheck">
+                <h5><i class="fas fa-mobile-alt"></i> Device Compatibility</h5>
+                <div id="deviceInfo">Checking device compatibility...</div>
+            </div>
+            
+            <div class="ar-container" id="arContainer">
+                <div class="ar-overlay">
+                    <div class="ar-title">AR Viewer</div>
+                    <div class="ar-subtitle">Point your camera at a flat surface to place the 3D model</div>
+                    <div class="model-info-badge">
+                        <i class="fas fa-cube"></i> Model: {{ model_id if model_id else 'demo_model' }}
+                    </div>
+                </div>
+                
+                <div class="ar-controls">
+                    <button class="ar-button primary" onclick="startAR()">
+                        <i class="fas fa-play"></i> Start AR
+                    </button>
+                    <button class="ar-button" onclick="resetAR()">
+                        <i class="fas fa-redo"></i> Reset
+                    </button>
+                    <button class="ar-button" onclick="captureAR()">
+                        <i class="fas fa-camera"></i> Capture
+                    </button>
+                    <button class="ar-button" onclick="exitAR()">
+                        <i class="fas fa-times"></i> Exit
+                    </button>
+                </div>
+                
+                <div id="arViewer">
+                    <div class="ar-viewer-content">
+                        <div>
+                            <div class="ar-ready-icon">
+                                <i class="fas fa-vr-cardboard"></i>
+                            </div>
+                            <div class="ar-ready-title">AR Viewer Ready</div>
+                            <div class="ar-ready-subtitle">Click "Start AR" to begin the augmented reality experience</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="ar-features">
+                        <h5><i class="fas fa-star"></i> AR Features</h5>
+                        <div class="feature-item">
+                            <div class="feature-icon"><i class="fas fa-cube"></i></div>
+                            <div>Real-time 3D model placement</div>
+                        </div>
+                        <!-- <div class="feature-item">
+                            <div class="feature-icon"><i class="fas fa-search"></i></div>
+                            <div>Advanced surface detection</div>
+                        </div> -->
+                        <div class="feature-item">
+                            <div class="feature-icon"><i class="fas fa-expand-arrows-alt"></i></div>
+                            <div>Model scaling and rotation</div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon"><i class="fas fa-camera"></i></div>
+                            <div>Screenshot capture</div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon"><i class="fab fa-apple"></i></div>
+                            <div>AR Quick Look support (iOS)</div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon"><i class="fab fa-chrome"></i></div>
+                            <div>WebXR support (Android/Web)</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="ar-features">
+                        <h5><i class="fas fa-info-circle"></i> Instructions</h5>
+                        <div class="feature-item">
+                            <div class="feature-icon"><i class="fas fa-lightbulb"></i></div>
+                            <div>Ensure you have good lighting</div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon"><i class="fas fa-crosshairs"></i></div>
+                            <div>Point camera at a flat surface</div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon"><i class="fas fa-hand-pointer"></i></div>
+                            <div>Tap to place the 3D model</div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon"><i class="fas fa-hand-rock"></i></div>
+                            <div>Use gestures to rotate and scale</div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon"><i class="fas fa-walking"></i></div>
+                            <div>Move around to view from different angles</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
+
+<script>
+let arSession = null;
+let arViewer = null;
+let currentModel = '{{ model_id if model_id else "demo_model" }}';
+
+// Check device compatibility
+function checkDeviceCompatibility() {
+    const deviceInfo = document.getElementById('deviceInfo');
+    const deviceCheck = document.getElementById('deviceCheck');
+    
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const isAndroid = /Android/.test(navigator.userAgent);
+    const isMobile = isIOS || isAndroid;
+    
+    let compatibility = '';
+    let status = 'warning';
+    
+    if (isIOS) {
+        compatibility = `
+            <div class="feature-item">
+                <div class="feature-icon"><i class="fab fa-apple"></i></div>
+                <div><strong>iOS Device Detected</strong><br>
+                ✅ AR Quick Look supported<br>
+                ✅ Safari browser recommended<br>
+                ✅ iOS 12+ required</div>
+            </div>
+        `;
+        status = 'success';
+    } else if (isAndroid) {
+        compatibility = `
+            <div class="feature-item">
+                <div class="feature-icon"><i class="fab fa-android"></i></div>
+                <div><strong>Android Device Detected</strong><br>
+                ✅ WebXR supported<br>
+                ✅ Chrome browser recommended<br>
+                ✅ ARCore required</div>
+            </div>
+        `;
+        status = 'success';
+    } else {
+        compatibility = `
+            <div class="feature-item">
+                <div class="feature-icon"><i class="fas fa-desktop"></i></div>
+                <div><strong>Desktop Device Detected</strong><br>
+                ⚠️ Limited AR support<br>
+                ⚠️ Use mobile device for full AR experience<br>
+                ✅ 3D viewer available</div>
+            </div>
+        `;
+        status = 'warning';
+    }
+    
+    deviceInfo.innerHTML = compatibility;
+    deviceCheck.className = `device-check ${status}`;
+}
+
+// Start AR session
+function startAR() {
+    const container = document.getElementById('arContainer');
+    const viewer = document.getElementById('arViewer');
+    
+    // Check if WebXR is supported
+    if ('xr' in navigator) {
+        navigator.xr.isSessionSupported('immersive-ar').then((supported) => {
+            if (supported) {
+                startWebXR();
+            } else {
+                startFallbackAR();
+            }
+        });
+    } else {
+        startFallbackAR();
+    }
+}
+
+// Start WebXR AR session
+async function startWebXR() {
+    try {
+        const session = await navigator.xr.requestSession('immersive-ar', {
+            requiredFeatures: ['hit-test', 'dom-overlay'],
+            domOverlay: { root: document.getElementById('arViewer') }
+        });
+        
+        arSession = session;
+        
+        session.addEventListener('end', () => {
+            arSession = null;
+        });
+        
+        // Set up WebXR rendering
+        const canvas = document.createElement('canvas');
+        const gl = canvas.getContext('webgl', { xrCompatible: true });
+        
+        // Initialize Three.js for WebXR
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera();
+        const renderer = new THREE.WebGLRenderer({ canvas, context: gl });
+        
+        // Add enhanced 3D model to scene
+        const model = createEnhancedModel();
+        
+        // Center the model properly
+        const box = new THREE.Box3().setFromObject(model);
+        const center = box.getCenter(new THREE.Vector3());
+        model.position.sub(center);
+        
+        scene.add(model);
+        
+        // Set up reference space
+        const referenceSpace = await session.requestReferenceSpace('viewer');
+        const hitTestSource = await session.requestHitTestSource({ space: referenceSpace });
+        
+        session.requestAnimationFrame((time, frame) => {
+            if (frame) {
+                const hitTestResults = frame.getHitTestResults(hitTestSource);
+                if (hitTestResults.length > 0) {
+                    const hit = hitTestResults[0];
+                    const pose = hit.getPose(referenceSpace);
+                    model.position.set(pose.transform.position.x, pose.transform.position.y, pose.transform.position.z);
+                }
+            }
+            renderer.render(scene, camera);
+            session.requestAnimationFrame(arguments.callee);
+        });
+        
+    } catch (error) {
+        console.error('WebXR not supported:', error);
+        startFallbackAR();
+    }
+}
+
+// Create enhanced 3D model
+function createEnhancedModel() {
+    console.log('createEnhancedModel called, currentModel:', currentModel);
+    
+    const group = new THREE.Group();
+    
+    // Create a more interesting model based on the current model ID
+    if (currentModel.includes('car')) {
+        console.log('Creating car model');
+        // Car-like model - centered design
+        const bodyGeometry = new THREE.BoxGeometry(0.3, 0.15, 0.2);
+        const bodyMaterial = new THREE.MeshPhongMaterial({ 
+            color: 0xff4444,
+            metalness: 0.8,
+            roughness: 0.2
+        });
+        const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
+        body.position.set(0, 0.075, 0); // Center vertically
+        group.add(body);
+        
+        // Wheels - positioned symmetrically
+        const wheelGeometry = new THREE.CylinderGeometry(0.05, 0.05, 0.02, 8);
+        const wheelMaterial = new THREE.MeshPhongMaterial({ color: 0x333333 });
+        
+        const wheels = [
+            { x: 0.1, y: 0, z: 0.08 },
+            { x: 0.1, y: 0, z: -0.08 },
+            { x: -0.1, y: 0, z: 0.08 },
+            { x: -0.1, y: 0, z: -0.08 }
+        ];
+        
+        wheels.forEach(pos => {
+            const wheel = new THREE.Mesh(wheelGeometry, wheelMaterial);
+            wheel.rotation.z = Math.PI / 2;
+            wheel.position.set(pos.x, pos.y, pos.z);
+            group.add(wheel);
+        });
+        
+    } else if (currentModel.includes('robot')) {
+        console.log('Creating robot model');
+        // Robot-like model - centered design
+        const headGeometry = new THREE.BoxGeometry(0.15, 0.15, 0.15);
+        const headMaterial = new THREE.MeshPhongMaterial({ color: 0x888888 });
+        const head = new THREE.Mesh(headGeometry, headMaterial);
+        head.position.set(0, 0.2, 0); // Center horizontally
+        group.add(head);
+        
+        const bodyGeometry = new THREE.BoxGeometry(0.2, 0.25, 0.1);
+        const bodyMaterial = new THREE.MeshPhongMaterial({ color: 0x666666 });
+        const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
+        body.position.set(0, 0, 0); // Center at origin
+        group.add(body);
+        
+    } else {
+        console.log('Creating default cube model');
+        // Default enhanced cube - perfectly centered
+        const geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2);
+        const material = new THREE.MeshPhongMaterial({ 
+            color: 0x4ecdc4,
+            transparent: true,
+            opacity: 0.9
+        });
+        const cube = new THREE.Mesh(geometry, material);
+        cube.position.set(0, 0, 0); // Center at origin
+        group.add(cube);
+    }
+    
+    console.log('Model created successfully');
+    return group;
+}
+
+// Start fallback AR (3D viewer)
+function startFallbackAR() {
+    const viewer = document.getElementById('arViewer');
+    viewer.innerHTML = `
+        <div class="ar-viewer-content">
+            <div>
+                <div class="ar-ready-icon">
+                    <i class="fas fa-cube"></i>
+                </div>
+                <div class="ar-ready-title">3D Viewer Mode</div>
+                <div class="ar-ready-subtitle">AR not available on this device<br>Use mouse/touch to interact with the 3D model</div>
+            </div>
+        </div>
+    `;
+    
+    // Initialize Three.js viewer
+    init3DViewer();
+}
+
+// Initialize 3D viewer
+function init3DViewer() {
+    const viewer = document.getElementById('arViewer');
+    const width = viewer.clientWidth;
+    const height = viewer.clientHeight;
+    
+    // Create scene
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x1a1a2e);
+    
+    // Create camera
+    const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+    camera.position.set(0, 0, 5);
+    
+    // Create renderer
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(width, height);
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    
+    // Clear viewer and add renderer
+    viewer.innerHTML = '';
+    viewer.appendChild(renderer.domElement);
+    
+    // Add lights
+    const ambientLight = new THREE.AmbientLight(0x404040, 0.6);
+    scene.add(ambientLight);
+    
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+    directionalLight.position.set(10, 10, 5);
+    directionalLight.castShadow = true;
+    scene.add(directionalLight);
+    
+    // Add enhanced 3D model
+    const model = createEnhancedModel();
+    model.castShadow = true;
+    model.receiveShadow = true;
+    scene.add(model);
+    
+    // Center the model properly
+    const box = new THREE.Box3().setFromObject(model);
+    const center = box.getCenter(new THREE.Vector3());
+    const size = box.getSize(new THREE.Vector3());
+    
+    // Center the model at origin
+    model.position.sub(center);
+    
+    // Adjust camera to fit model
+    const maxDim = Math.max(size.x, size.y, size.z);
+    const fov = camera.fov * (Math.PI / 180);
+    let cameraZ = Math.abs(maxDim / 2 / Math.tan(fov / 2));
+    
+    camera.position.z = cameraZ * 1.5;
+    camera.lookAt(0, 0, 0);
+    
+    // Add controls
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+    controls.target.set(0, 0, 0);
+    controls.update();
+    
+    // Animation loop
+    function animate() {
+        requestAnimationFrame(animate);
+        model.rotation.x += 0.005;
+        model.rotation.y += 0.01;
+        controls.update();
+        renderer.render(scene, camera);
+    }
+    animate();
+}
+
+// Reset AR session
+function resetAR() {
+    if (arSession) {
+        arSession.end();
+    }
+    // Reinitialize the preview model
+    initPreviewModel();
+}
+
+// Capture AR screenshot
+function captureAR() {
+    if (arSession) {
+        // Capture WebXR frame
+        console.log('Capturing AR screenshot...');
+        showToast('Screenshot captured!', 'success');
+    } else {
+        // Capture 3D viewer
+        const viewer = document.getElementById('arViewer');
+        const canvas = viewer.querySelector('canvas');
+        if (canvas) {
+            const link = document.createElement('a');
+            link.download = 'ar-screenshot.png';
+            link.href = canvas.toDataURL();
+            link.click();
+            showToast('Screenshot saved!', 'success');
+        }
+    }
+}
+
+// Exit AR session
+function exitAR() {
+    if (arSession) {
+        arSession.end();
+    }
+    window.location.href = '/';
+}
+
+// Show toast notification
+function showToast(message, type = 'info') {
+    // Create toast element
+    const toast = document.createElement('div');
+    toast.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${type === 'success' ? '#4caf50' : '#2196f3'};
+        color: white;
+        padding: 15px 25px;
+        border-radius: 25px;
+        z-index: 10000;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        animation: slideIn 0.3s ease;
+    `;
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    
+    // Remove after 3 seconds
+    setTimeout(() => {
+        toast.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => document.body.removeChild(toast), 300);
+    }, 3000);
+}
+
+// Add CSS animations
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideIn {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes slideOut {
+        from { transform: translateX(0); opacity: 1; }
+        to { transform: translateX(100%); opacity: 0; }
+    }
+`;
+document.head.appendChild(style);
+
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOMContentLoaded triggered');
+    checkDeviceCompatibility();
+    console.log('About to call initPreviewModel');
+    // initPreviewModel(); // Temporarily disabled to see HTML positioning
+});
+
+// Initialize preview model in ready state
+function initPreviewModel() {
+    console.log('initPreviewModel called');
+    
+    // Check if Three.js is loaded
+    if (typeof THREE === 'undefined') {
+        console.error('Three.js not loaded');
+        return;
+    }
+    
+    const viewer = document.getElementById('arViewer');
+    if (!viewer) {
+        console.error('arViewer element not found');
+        return;
+    }
+    
+    const width = viewer.clientWidth;
+    const height = viewer.clientHeight;
+    
+    console.log('Viewer dimensions:', width, 'x', height);
+    
+    try {
+        // Create scene
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x1a1a2e);
+        
+        // Create camera
+        const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+        camera.position.set(0, 0, 3);
+        
+        // Create renderer
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(width, height);
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        
+        // Clear viewer and add renderer
+        viewer.innerHTML = '';
+        viewer.appendChild(renderer.domElement);
+        
+        // Add lights
+        const ambientLight = new THREE.AmbientLight(0x404040, 0.6);
+        scene.add(ambientLight);
+        
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        directionalLight.position.set(10, 10, 5);
+        directionalLight.castShadow = true;
+        scene.add(directionalLight);
+        
+        // Add preview 3D model
+        const model = createEnhancedModel();
+        model.castShadow = true;
+        model.receiveShadow = true;
+        scene.add(model);
+        
+        // Center the model properly
+        const box = new THREE.Box3().setFromObject(model);
+        const center = box.getCenter(new THREE.Vector3());
+        const size = box.getSize(new THREE.Vector3());
+        
+        // Center the model at origin
+        model.position.sub(center);
+        
+        // Adjust camera to fit model
+        const maxDim = Math.max(size.x, size.y, size.z);
+        const fov = camera.fov * (Math.PI / 180);
+        let cameraZ = Math.abs(maxDim / 2 / Math.tan(fov / 2));
+        
+        camera.position.z = cameraZ * 1.5;
+        camera.lookAt(0, 0, 0);
+        
+        // Add controls
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+        controls.target.set(0, 0, 0);
+        controls.update();
+        
+        console.log('3D scene initialized successfully');
+        
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            model.rotation.x += 0.005;
+            model.rotation.y += 0.01;
+            controls.update();
+            renderer.render(scene, camera);
+        }
+        animate();
+        
+    } catch (error) {
+        console.error('Error initializing 3D preview:', error);
+    }
+}
+</script>
+{% endblock %} 

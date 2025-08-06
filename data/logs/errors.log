@@ -1,0 +1,102 @@
+2025-08-06 01:10:28 - web_server - ERROR - create_app:44 - Settings validation failed: TRIPO_API_KEY must be set in environment or .env file
+2025-08-06 01:10:28 - web_server - ERROR - main:39 - Web server failed to start: TRIPO_API_KEY must be set in environment or .env file
+2025-08-06 01:11:30 - web_server - ERROR - create_app:44 - Settings validation failed: TRIPO_API_KEY must be set in environment or .env file
+2025-08-06 01:11:30 - web_server - ERROR - main:39 - Web server failed to start: TRIPO_API_KEY must be set in environment or .env file
+2025-08-06 01:11:51 - web_server - ERROR - main:39 - Web server failed to start: name 'settings' is not defined
+2025-08-06 02:01:20 - src.web.routes.api - ERROR - generate_model:129 - Error generating model: API key appears to be a placeholder
+2025-08-06 02:04:23 - src.web.routes.api - ERROR - generate_model:90 - Tripo API error: API key appears to be a placeholder
+2025-08-06 02:04:23 - src.web.routes.api - ERROR - generate_model:123 - Error generating model: module 'datetime' has no attribute 'now'
+2025-08-06 02:05:05 - src.web.routes.api - ERROR - generate_model:93 - Tripo API error: API key appears to be a placeholder
+2025-08-06 02:05:11 - src.web.routes.api - ERROR - generate_model:93 - Tripo API error: API key appears to be a placeholder
+2025-08-06 02:09:03 - src.web.routes.api - ERROR - generate_model:93 - Tripo API error: API key appears to be a placeholder
+2025-08-06 02:19:00 - src.web.routes.api - ERROR - generate_model:93 - Tripo API error: API key appears to be a placeholder
+2025-08-06 02:19:00 - src.web.routes.api - ERROR - generate_model:93 - Tripo API error: API key appears to be a placeholder
+2025-08-06 02:24:57 - src.web.routes.api - ERROR - generate_model:93 - Tripo API error: API key appears to be a placeholder
+2025-08-06 02:24:57 - src.web.routes.api - ERROR - generate_model:93 - Tripo API error: API key appears to be a placeholder
+2025-08-06 02:26:54 - src.web.routes.api - ERROR - generate_model:93 - Tripo API error: API key appears to be a placeholder
+2025-08-06 02:26:54 - src.web.routes.api - ERROR - generate_model:93 - Tripo API error: API key appears to be a placeholder
+2025-08-06 02:27:15 - src.web.routes.api - ERROR - generate_model:93 - Tripo API error: API key appears to be a placeholder
+2025-08-06 02:28:18 - src.web.routes.api - ERROR - generate_model:93 - Tripo API error: API key appears to be a placeholder
+2025-08-06 02:28:18 - src.web.routes.api - ERROR - generate_model:93 - Tripo API error: API key appears to be a placeholder
+2025-08-06 02:29:02 - src.web.routes.api - ERROR - generate_model:93 - Tripo API error: API key appears to be a placeholder
+2025-08-06 02:29:03 - src.web.routes.api - ERROR - generate_model:93 - Tripo API error: API key appears to be a placeholder
+2025-08-06 02:35:20 - TripoAPIClient - ERROR - _handle_response:132 - Error parsing response: Expecting value: line 1 column 1 (char 0)
+2025-08-06 02:35:22 - TripoAPIClient - ERROR - _handle_response:132 - Error parsing response: Expecting value: line 1 column 1 (char 0)
+2025-08-06 02:35:25 - TripoAPIClient - ERROR - _handle_response:132 - Error parsing response: Expecting value: line 1 column 1 (char 0)
+2025-08-06 02:35:29 - TripoAPIClient - ERROR - _handle_response:132 - Error parsing response: Expecting value: line 1 column 1 (char 0)
+2025-08-06 02:35:47 - TripoAPIClient - ERROR - _handle_response:132 - Error parsing response: Expecting value: line 1 column 1 (char 0)
+2025-08-06 02:35:48 - TripoAPIClient - ERROR - _handle_response:132 - Error parsing response: Expecting value: line 1 column 1 (char 0)
+2025-08-06 02:35:51 - TripoAPIClient - ERROR - _handle_response:132 - Error parsing response: Expecting value: line 1 column 1 (char 0)
+2025-08-06 02:35:56 - TripoAPIClient - ERROR - _handle_response:132 - Error parsing response: Expecting value: line 1 column 1 (char 0)
+2025-08-06 02:37:32 - TripoAPIClient - ERROR - _handle_response:132 - Error parsing response: Expecting value: line 1 column 1 (char 0)
+2025-08-06 02:37:33 - TripoAPIClient - ERROR - _handle_response:132 - Error parsing response: Expecting value: line 1 column 1 (char 0)
+2025-08-06 02:37:36 - TripoAPIClient - ERROR - _handle_response:132 - Error parsing response: Expecting value: line 1 column 1 (char 0)
+2025-08-06 02:37:40 - TripoAPIClient - ERROR - _handle_response:132 - Error parsing response: Expecting value: line 1 column 1 (char 0)
+2025-08-06 02:41:56 - TripoAPIClient - ERROR - _handle_response:132 - Error parsing response: Expecting value: line 1 column 1 (char 0)
+2025-08-06 02:41:57 - TripoAPIClient - ERROR - _handle_response:132 - Error parsing response: Expecting value: line 1 column 1 (char 0)
+2025-08-06 02:42:00 - TripoAPIClient - ERROR - _handle_response:132 - Error parsing response: Expecting value: line 1 column 1 (char 0)
+2025-08-06 02:42:04 - TripoAPIClient - ERROR - _handle_response:132 - Error parsing response: Expecting value: line 1 column 1 (char 0)
+2025-08-06 02:44:10 - TripoAPIClient - ERROR - _handle_response:132 - Error parsing response: Expecting value: line 1 column 1 (char 0)
+2025-08-06 02:44:11 - TripoAPIClient - ERROR - _handle_response:132 - Error parsing response: Expecting value: line 1 column 1 (char 0)
+2025-08-06 02:44:13 - TripoAPIClient - ERROR - _handle_response:132 - Error parsing response: Expecting value: line 1 column 1 (char 0)
+2025-08-06 02:44:17 - TripoAPIClient - ERROR - _handle_response:132 - Error parsing response: Expecting value: line 1 column 1 (char 0)
+2025-08-06 02:53:10 - src.api_clients.tripo_client - ERROR - generate_model:145 - Generation failed: tripo3d SDK not installed. Run: pip install tripo3d
+2025-08-06 02:53:38 - src.api_clients.tripo_client - ERROR - generate_model:145 - Generation failed: tripo3d SDK not installed. Run: pip install tripo3d
+2025-08-06 02:54:09 - src.api_clients.tripo_client - ERROR - generate_model:145 - Generation failed: tripo3d SDK not installed. Run: pip install tripo3d
+2025-08-06 02:54:45 - src.api_clients.tripo_client - ERROR - generate_model:145 - Generation failed: tripo3d SDK not installed. Run: pip install tripo3d
+2025-08-06 02:55:39 - src.api_clients.tripo_client - ERROR - _get_client:86 - ImportError: No module named 'tripo3d'
+2025-08-06 02:55:39 - src.api_clients.tripo_client - ERROR - generate_model:149 - Generation failed: tripo3d SDK not installed. Run: pip install tripo3d
+2025-08-06 02:56:31 - src.api_clients.tripo_client - ERROR - generate_model:149 - Generation failed: HTTP 403: Request failed: Forbidden. Response: {"code":2010,"message":"You don't have enough credit to create this task","suggestion":"Please purchase more credit"}
+2025-08-06 03:01:02 - src.api_clients.tripo_client - ERROR - generate_model:149 - Generation failed: HTTP 403: Request failed: Forbidden. Response: {"code":2010,"message":"You don't have enough credit to create this task","suggestion":"Please purchase more credit"}
+2025-08-06 03:12:00 - src.api_clients.tripo_client - ERROR - generate_model:154 - Generation failed: HTTP 403: Request failed: Forbidden. Response: {"code":2010,"message":"You don't have enough credit to create this task","suggestion":"Please purchase more credit"}
+2025-08-06 03:28:22 - src.api_clients.tripo_client - ERROR - generate_model:179 - API call failed: You don't have enough credit to create this task - Please purchase more credit
+2025-08-06 03:31:11 - src.api_clients.tripo_client - ERROR - generate_model:182 - API call failed: Authentication failed - Check if your credentials is valid, and ensure you set it correctly
+2025-08-06 03:58:17 - src.web.routes.api - ERROR - load_demo_credits:64 - Error loading demo credits: type object 'datetime.datetime' has no attribute 'datetime'
+2025-08-06 03:58:24 - src.api_clients.tripo_client - ERROR - generate_model:182 - API call failed: Authentication failed - Check if your credentials is valid, and ensure you set it correctly
+2025-08-06 03:58:24 - src.web.routes.api - ERROR - load_demo_credits:64 - Error loading demo credits: type object 'datetime.datetime' has no attribute 'datetime'
+2025-08-06 03:58:24 - src.web.routes.api - ERROR - generate_model:197 - Model generation error: type object 'datetime.datetime' has no attribute 'datetime'
+2025-08-06 03:58:59 - src.api_clients.tripo_client - ERROR - generate_model:182 - API call failed: Authentication failed - Check if your credentials is valid, and ensure you set it correctly
+2025-08-06 03:58:59 - src.web.routes.api - ERROR - generate_model:197 - Model generation error: name 'random' is not defined
+2025-08-06 03:59:14 - src.api_clients.tripo_client - ERROR - generate_model:182 - API call failed: Authentication failed - Check if your credentials is valid, and ensure you set it correctly
+2025-08-06 04:01:28 - src.api_clients.tripo_client - ERROR - generate_model:182 - API call failed: Authentication failed - Check if your credentials is valid, and ensure you set it correctly
+2025-08-06 04:01:28 - src.api_clients.tripo_client - ERROR - generate_model:182 - API call failed: Authentication failed - Check if your credentials is valid, and ensure you set it correctly
+2025-08-06 17:26:29 - mcp_server - ERROR - main:35 - MCP server failed to start: 1 validation error for StdioServerParameters
+command
+  Field required [type=missing, input_value={'name': '3d-ar-demo', 'version': '1.0.0'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+2025-08-06 17:27:33 - mcp_server - ERROR - main:35 - MCP server failed to start: NotificationOptions.__init__() got an unexpected keyword argument 'method'
+2025-08-06 17:28:15 - mcp_server - ERROR - main:35 - MCP server failed to start: unhandled errors in a TaskGroup (2 sub-exceptions)
+2025-08-06 17:28:23 - mcp_server - ERROR - main:35 - MCP server failed to start: unhandled errors in a TaskGroup (2 sub-exceptions)
+2025-08-06 18:08:10 - src.web.routes.api - ERROR - generate_model:219 - Error generating model: name 'check_credits' is not defined
+2025-08-06 18:10:14 - src.web.routes.api - ERROR - generate_real_model:207 - Generation failed: None
+2025-08-06 18:37:52 - src.web.routes.api - ERROR - generate_real_model:218 - Generation failed: None
+2025-08-06 18:38:12 - src.web.routes.api - ERROR - generate_real_model:218 - Generation failed: None
+2025-08-06 18:47:51 - src.web.routes.api - ERROR - generate_real_model:218 - Generation failed: None
+2025-08-06 18:54:10 - src.web.routes.api - ERROR - generate_real_model:226 - Generation failed: None
+2025-08-06 19:15:45 - src.web.routes.api - ERROR - generate_real_model:226 - Generation failed: None
+2025-08-06 19:15:45 - src.web.routes.api - ERROR - generate_model:261 - Generation failed: Generation failed: None
+2025-08-06 19:21:49 - src.web.routes.api - ERROR - list_models:348 - Error listing models: '<' not supported between instances of 'str' and 'NoneType'
+2025-08-06 19:22:38 - src.web.routes.api - ERROR - list_models:348 - Error listing models: '<' not supported between instances of 'str' and 'NoneType'
+2025-08-06 19:22:42 - src.web.routes.api - ERROR - list_models:348 - Error listing models: '<' not supported between instances of 'str' and 'NoneType'
+2025-08-06 19:22:43 - src.web.routes.api - ERROR - list_models:348 - Error listing models: '<' not supported between instances of 'str' and 'NoneType'
+2025-08-06 19:22:44 - src.web.routes.api - ERROR - list_models:348 - Error listing models: '<' not supported between instances of 'str' and 'NoneType'
+2025-08-06 19:22:44 - src.web.routes.api - ERROR - list_models:348 - Error listing models: '<' not supported between instances of 'str' and 'NoneType'
+2025-08-06 19:22:44 - src.web.routes.api - ERROR - list_models:348 - Error listing models: '<' not supported between instances of 'str' and 'NoneType'
+2025-08-06 19:22:44 - src.web.routes.api - ERROR - list_models:348 - Error listing models: '<' not supported between instances of 'str' and 'NoneType'
+2025-08-06 19:22:45 - src.web.routes.api - ERROR - list_models:348 - Error listing models: '<' not supported between instances of 'str' and 'NoneType'
+2025-08-06 19:26:28 - src.web.routes.api - ERROR - download_model:500 - Error downloading model tripo_64ba91f8-7d7c-4814-9088-c61388f6d0c9: 'Response' object is not subscriptable
+2025-08-06 19:26:34 - src.web.routes.api - ERROR - download_model:500 - Error downloading model tripo_64ba91f8-7d7c-4814-9088-c61388f6d0c9: 'Response' object is not subscriptable
+2025-08-06 19:26:41 - src.web.routes.api - ERROR - download_model:500 - Error downloading model tripo_64ba91f8-7d7c-4814-9088-c61388f6d0c9: 'Response' object is not subscriptable
+2025-08-06 19:28:41 - src.web.routes.api - ERROR - download_model:486 - No download URL found for model tripo_64ba91f8-7d7c-4814-9088-c61388f6d0c9
+2025-08-06 19:29:37 - src.web.routes.api - ERROR - download_model:487 - No download URL found for model tripo_64d22768-f35c-42d8-a9aa-fc298a6668fb
+2025-08-06 20:32:05 - src.web.routes.api - ERROR - download_model:487 - No download URL found for model tripo_64ba91f8-7d7c-4814-9088-c61388f6d0c9
+2025-08-06 20:51:21 - src.web.routes.api - ERROR - download_model:487 - No download URL found for model tripo_64d22768-f35c-42d8-a9aa-fc298a6668fb
+2025-08-06 20:52:27 - src.web.routes.api - ERROR - download_model:487 - No download URL found for model tripo_64d22768-f35c-42d8-a9aa-fc298a6668fb
+2025-08-06 20:53:19 - src.web.routes.api - ERROR - download_model:487 - No download URL found for model tripo_64ba91f8-7d7c-4814-9088-c61388f6d0c9
+2025-08-06 20:53:24 - src.web.routes.api - ERROR - download_model:487 - No download URL found for model tripo_64ba91f8-7d7c-4814-9088-c61388f6d0c9
+2025-08-06 20:53:39 - src.web.routes.api - ERROR - download_model:487 - No download URL found for model tripo_64d22768-f35c-42d8-a9aa-fc298a6668fb
+2025-08-06 20:55:41 - src.web.routes.api - ERROR - download_model:487 - No download URL found for model tripo_64d22768-f35c-42d8-a9aa-fc298a6668fb
+2025-08-06 21:35:05 - src.web.routes.api - ERROR - download_model:496 - No download URL found for model tripo_64d22768-f35c-42d8-a9aa-fc298a6668fb
+2025-08-06 21:35:09 - src.web.routes.api - ERROR - download_model:496 - No download URL found for model tripo_64d22768-f35c-42d8-a9aa-fc298a6668fb
+2025-08-06 22:15:37 - src.web.routes.api - ERROR - download_model:496 - No download URL found for model tripo_64d22768-f35c-42d8-a9aa-fc298a6668fb
+2025-08-06 22:15:43 - src.web.routes.api - ERROR - download_model:496 - No download URL found for model tripo_64d22768-f35c-42d8-a9aa-fc298a6668fb

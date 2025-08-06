@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+{% block title %}View Model - {{ model_id }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{{ url_for('models.list_models') }}">All Models</a></li>
+                    <li class="breadcrumb-item active">View Model</li>
+                </ol>
+            </nav>
+            
+            <div class="text-center">
+                <h2>Model Details</h2>
+                <p class="text-muted">Model ID: {{ model_id }}</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>3D Model Preview</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="modelPreview" style="height: 400px; background: #f8f9fa; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                                <div class="text-center">
+                                    <i class="fas fa-cube" style="font-size: 3rem; color: #6c757d;"></i>
+                                    <p class="mt-2">3D Model Preview</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Model Information</h5>
+                        </div>
+                        <div class="card-body" id="modelInfo">
+                            <p class="text-muted">Loading model information...</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card mt-3">
+                        <div class="card-header">
+                            <h5>Actions</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary" onclick="downloadModel()">
+                                    <i class="fas fa-download"></i> Download Model
+                                </button>
+                                <button class="btn btn-success" onclick="viewInAR()">
+                                    <i class="fas fa-vr-cardboard"></i> View in AR
+                                </button>
+                                <button class="btn btn-info" onclick="shareModel()">
+                                    <i class="fas fa-share"></i> Share Model
+                                </button>
+                                <button class="btn btn-secondary" onclick="goBack()">
+                                    <i class="fas fa-arrow-left"></i> Back to List
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    loadModelInfo();
+});
+
+function loadModelInfo() {
+    const modelId = '{{ model_id }}';
+    
+    fetch(`/api/models/${modelId}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                displayModelInfo(data.model);
+            } else {
+                showError('Failed to load model information');
+            }
+        })
+        .catch(error => {
+            console.error('Error loading model info:', error);
+            showError('Failed to load model information');
+        });
+}
+
+function displayModelInfo(model) {
+    const modelInfo = document.getElementById('modelInfo');
+    modelInfo.innerHTML = `
+        <p><strong>Prompt:</strong> ${model.prompt}</p>
+        <p><strong>Format:</strong> ${model.format.toUpperCase()}</p>
+        <p><strong>Quality:</strong> ${model.quality}</p>
+        <p><strong>File Size:</strong> ${formatFileSize(model.file_size)}</p>
+        <p><strong>Created:</strong> ${new Date(model.created_at).toLocaleString()}</p>
+        <p><strong>Download URL:</strong> <a href="${model.download_url}" target="_blank">Download</a></p>
+    `;
+}
+
+function formatFileSize(bytes) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+}
+
+function downloadModel() {
+    const modelId = '{{ model_id }}';
+    window.open(`/api/models/${modelId}/download`, '_blank');
+}
+
+function viewInAR() {
+    const modelId = '{{ model_id }}';
+    window.open(`/models/${modelId}/ar`, '_blank');
+}
+
+function shareModel() {
+    const url = window.location.href;
+    if (navigator.share) {
+        navigator.share({
+            title: '3D Model',
+            url: url
+        });
+    } else {
+        navigator.clipboard.writeText(url).then(() => {
+            showToast('Link copied to clipboard!', 'success');
+        });
+    }
+}
+
+function goBack() {
+    window.location.href = '/models/';
+}
+
+// Make functions globally available
+window.downloadModel = downloadModel;
+window.viewInAR = viewInAR;
+window.shareModel = shareModel;
+window.goBack = goBack;
+
+function showError(message) {
+    const modelInfo = document.getElementById('modelInfo');
+    modelInfo.innerHTML = `
+        <div class="alert alert-danger">
+            <i class="fas fa-exclamation-triangle"></i> ${message}
+        </div>
+    `;
+}
+</script>
+{% endblock %} 

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR Viewer Debug</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f0f0f0;
+        }
+        .debug-panel {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .log {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 10px;
+            margin: 10px 0;
+            font-family: monospace;
+            white-space: pre-wrap;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .button:hover {
+            background: #0056b3;
+        }
+        .error {
+            color: #dc3545;
+        }
+        .success {
+            color: #28a745;
+        }
+    </style>
+</head>
+<body>
+    <h1>AR Viewer Debug Panel</h1>
+    
+    <div class="debug-panel">
+        <h3>Test AR Viewer Functions</h3>
+        <button class="button" onclick="testLoadModelData()">Test Load Model Data</button>
+        <button class="button" onclick="testDeviceCompatibility()">Test Device Compatibility</button>
+        <button class="button" onclick="testWebXRSupport()">Test WebXR Support</button>
+        <button class="button" onclick="testThreeJS()">Test Three.js</button>
+        <button class="button" onclick="clearLog()">Clear Log</button>
+    </div>
+    
+    <div class="debug-panel">
+        <h3>Console Log</h3>
+        <div id="log" class="log"></div>
+    </div>
+
+    <script>
+        let logElement = document.getElementById('log');
+        
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const color = type === 'error' ? 'red' : type === 'success' ? 'green' : 'black';
+            logElement.innerHTML += `<span style="color: ${color}">[${timestamp}] ${message}</span>\n`;
+            logElement.scrollTop = logElement.scrollHeight;
+            console.log(message);
+        }
+        
+        function clearLog() {
+            logElement.innerHTML = '';
+        }
+        
+        async function testLoadModelData() {
+            log('Testing loadModelData function...');
+            try {
+                const modelId = 'tripo_3f1ab50b-835b-49ea-82bc-e858c2734a13';
+                log(`Loading model data for: ${modelId}`);
+                
+                const response = await fetch(`/api/models/${modelId}`);
+                log(`Response status: ${response.status}`);
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    log(`Response data: ${JSON.stringify(data, null, 2)}`);
+                    
+                    if (data.success && data.model) {
+                        log('✅ Model data loaded successfully', 'success');
+                        log(`Model prompt: ${data.model.prompt}`);
+                        log(`Model output: ${JSON.stringify(data.model.output, null, 2)}`);
+                    } else {
+                        log('❌ Model data structure invalid', 'error');
+                    }
+                } else {
+                    log(`❌ HTTP error: ${response.status}`, 'error');
+                }
+            } catch (error) {
+                log(`❌ Error loading model data: ${error.message}`, 'error');
+            }
+        }
+        
+        function testDeviceCompatibility() {
+            log('Testing device compatibility...');
+            
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+            const isAndroid = /Android/.test(navigator.userAgent);
+            const isMobile = isIOS || isAndroid;
+            
+            log(`User Agent: ${navigator.userAgent}`);
+            log(`iOS: ${isIOS}`);
+            log(`Android: ${isAndroid}`);
+            log(`Mobile: ${isMobile}`);
+            
+            if (isIOS) {
+                log('✅ iOS device detected', 'success');
+            } else if (isAndroid) {
+                log('✅ Android device detected', 'success');
+            } else {
+                log('⚠️ Desktop device detected', 'error');
+            }
+        }
+        
+        async function testWebXRSupport() {
+            log('Testing WebXR support...');
+            
+            if ('xr' in navigator) {
+                log('✅ WebXR API available');
+                
+                try {
+                    const arSupported = await navigator.xr.isSessionSupported('immersive-ar');
+                    log(`AR supported: ${arSupported}`);
+                    
+                    if (arSupported) {
+                        log('✅ AR session supported', 'success');
+                    } else {
+                        log('❌ AR session not supported', 'error');
+                    }
+                } catch (error) {
+                    log(`❌ Error checking AR support: ${error.message}`, 'error');
+                }
+            } else {
+                log('❌ WebXR not available', 'error');
+            }
+        }
+        
+        function testThreeJS() {
+            log('Testing Three.js availability...');
+            
+            if (typeof THREE !== 'undefined') {
+                log('✅ Three.js loaded successfully', 'success');
+                log(`Three.js version: ${THREE.REVISION}`);
+                
+                // Test basic Three.js functionality
+                try {
+                    const scene = new THREE.Scene();
+                    const camera = new THREE.PerspectiveCamera();
+                    const renderer = new THREE.WebGLRenderer();
+                    log('✅ Three.js components created successfully', 'success');
+                } catch (error) {
+                    log(`❌ Three.js error: ${error.message}`, 'error');
+                }
+            } else {
+                log('❌ Three.js not loaded', 'error');
+            }
+        }
+        
+        // Auto-run tests on page load
+        window.addEventListener('load', () => {
+            log('Page loaded, running initial tests...');
+            setTimeout(() => {
+                testDeviceCompatibility();
+                testWebXRSupport();
+                testThreeJS();
+            }, 1000);
+        });
+    </script>
+</body>
+</html> 

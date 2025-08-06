@@ -1,0 +1,133 @@
+version: '3.8'
+
+services:
+  # Redis service for caching and background tasks
+  redis:
+    image: redis:7-alpine
+    container_name: 3d-ar-demo-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Web server
+  web:
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile
+    container_name: 3d-ar-demo-web
+    ports:
+      - "5000:5000"
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - DEBUG=False
+      - WEB_SERVER_HOST=0.0.0.0
+      - WEB_SERVER_PORT=5000
+    volumes:
+      - model_data:/app/data/generated_models
+      - cache_data:/app/data/cache
+      - log_data:/app/data/logs
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # MCP server
+  mcp:
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile
+    container_name: 3d-ar-demo-mcp
+    command: ["python", "scripts/start_mcp_server.py"]
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - DEBUG=False
+      - MCP_SERVER_HOST=0.0.0.0
+      - MCP_SERVER_PORT=8000
+    volumes:
+      - model_data:/app/data/generated_models
+      - cache_data:/app/data/cache
+      - log_data:/app/data/logs
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Celery worker for background tasks
+  worker:
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile
+    container_name: 3d-ar-demo-worker
+    command: ["celery", "-A", "src.services.celery_app", "worker", "--loglevel=info"]
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - DEBUG=False
+    volumes:
+      - model_data:/app/data/generated_models
+      - cache_data:/app/data/cache
+      - log_data:/app/data/logs
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Celery beat for scheduled tasks
+  beat:
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile
+    container_name: 3d-ar-demo-beat
+    command: ["celery", "-A", "src.services.celery_app", "beat", "--loglevel=info"]
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - DEBUG=False
+    volumes:
+      - model_data:/app/data/generated_models
+      - cache_data:/app/data/cache
+      - log_data:/app/data/logs
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Nginx reverse proxy (optional)
+  nginx:
+    image: nginx:alpine
+    container_name: 3d-ar-demo-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - web
+    restart: unless-stopped
+    profiles:
+      - production
+
+volumes:
+  redis_data:
+    driver: local
+  model_data:
+    driver: local
+  cache_data:
+    driver: local
+  log_data:
+    driver: local
+
+networks:
+  default:
+    name: 3d-ar-demo-network 
