@@ -140,6 +140,9 @@ def run_app(host: str = "0.0.0.0", port: int = 5000, debug: bool = False):
     logger = get_logger("web_server")
     logger.info(f"Starting web server on {host}:{port}")
     
+    # Create the Flask app
+    app = create_app()
+    
     app.run(
         host=host,
         port=port,
