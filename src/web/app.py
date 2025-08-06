@@ -5,6 +5,7 @@ Flask web application for 3D AR demo.
 import os
 from pathlib import Path
 from typing import Optional
+from datetime import datetime
 
 from flask import Flask, render_template, request, jsonify, send_from_directory, send_file
 from flask_cors import CORS
@@ -75,11 +76,11 @@ def create_app(config_name: Optional[str] = None) -> Flask:
     # Health check endpoint
     @app.route('/health')
     def health_check():
-        """Health check endpoint."""
+        """Health check endpoint for deployment platforms."""
         return jsonify({
             'status': 'healthy',
-            'service': '3d-ar-demo-web',
-            'version': '1.0.0'
+            'timestamp': datetime.now().isoformat(),
+            'service': '3D AR Generator'
         })
     
     # Main routes
@@ -131,16 +132,10 @@ def create_app(config_name: Optional[str] = None) -> Flask:
     return app
 
 
-def run_app(host: str = 'localhost', port: int = 5000, debug: bool = False):
-    """
-    Run the Flask application.
-    
-    Args:
-        host: Host to bind to
-        port: Port to bind to
-        debug: Enable debug mode
-    """
-    app = create_app()
+def run_app(host: str = "0.0.0.0", port: int = 5000, debug: bool = False):
+    """Run the Flask application."""
+    # Get port from environment variable for deployment platforms
+    port = int(os.environ.get("PORT", port))
     
     logger = get_logger("web_server")
     logger.info(f"Starting web server on {host}:{port}")
@@ -148,8 +143,7 @@ def run_app(host: str = 'localhost', port: int = 5000, debug: bool = False):
     app.run(
         host=host,
         port=port,
-        debug=debug,
-        threaded=True
+        debug=debug
     )
 
 
