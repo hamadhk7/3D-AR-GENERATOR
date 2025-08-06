@@ -6533,3 +6533,10 @@
 {"asctime": "2025-08-07 01:21:47", "name": "src.web.routes.api", "levelname": "INFO", "message": "Returning 48 models total"}
 {"asctime": "2025-08-07 01:21:47", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [07/Aug/2025 01:21:47] \"GET /api/models?limit=6 HTTP/1.1\" 200 -"}
 {"asctime": "2025-08-07 01:21:47", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [07/Aug/2025 01:21:47] \"GET /api/credits HTTP/1.1\" 200 -"}
+{"asctime": "2025-08-07 02:45:40", "name": "werkzeug", "levelname": "INFO", "message": "\u001b[31m\u001b[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.\u001b[0m\n * Running on http://localhost:5000"}
+{"asctime": "2025-08-07 02:45:40", "name": "werkzeug", "levelname": "INFO", "message": "\u001b[33mPress CTRL+C to quit\u001b[0m"}
+{"asctime": "2025-08-07 02:45:40", "name": "werkzeug", "levelname": "INFO", "message": " * Restarting with stat"}
+{"asctime": "2025-08-07 02:45:41", "name": "werkzeug", "levelname": "WARNING", "message": " * Debugger is active!"}
+{"asctime": "2025-08-07 02:45:41", "name": "werkzeug", "levelname": "INFO", "message": " * Debugger PIN: 227-763-275"}
+{"asctime": "2025-08-07 02:45:48", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [07/Aug/2025 02:45:48] \"GET /health HTTP/1.1\" 200 -"}
+{"asctime": "2025-08-07 02:45:54", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [07/Aug/2025 02:45:54] \"GET / HTTP/1.1\" 200 -"}

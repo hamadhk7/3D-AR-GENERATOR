@@ -132,7 +132,7 @@ def create_app(config_name: Optional[str] = None) -> Flask:
     return app
 
 
-def run_app(host: str = "0.0.0.0", port: int = 5000, debug: bool = False):
+def run_app(host: str = "localhost", port: int = 5000, debug: bool = False):
     """Run the Flask application."""
     # Get port from environment variable for deployment platforms
     port = int(os.environ.get("PORT", port))
@@ -143,8 +143,9 @@ def run_app(host: str = "0.0.0.0", port: int = 5000, debug: bool = False):
     # Create the Flask app
     app = create_app()
     
+    # Use localhost for Railway deployment to avoid network binding issues
     app.run(
-        host=host,
+        host="localhost",
         port=port,
         debug=debug
     )
