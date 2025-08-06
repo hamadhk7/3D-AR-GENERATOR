@@ -143,9 +143,15 @@ def run_app(host: str = "localhost", port: int = 5000, debug: bool = False):
     # Create the Flask app
     app = create_app()
     
-    # Use localhost for Railway deployment to avoid network binding issues
+    # For Railway deployment, bind to all interfaces (0.0.0.0)
+    # For local development, use localhost
+    if os.environ.get("PORT"):  # If PORT is set, we're in Railway
+        host = "0.0.0.0"
+    else:
+        host = "localhost"
+    
     app.run(
-        host="localhost",
+        host=host,
         port=port,
         debug=debug
     )
