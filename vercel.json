@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "scripts/start_web_server.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "scripts/start_web_server.py"
+    }
+  ],
+  "env": {
+    "FLASK_ENV": "production",
+    "WEB_SERVER_HOST": "0.0.0.0",
+    "WEB_SERVER_PORT": "8080"
+  }
+} 

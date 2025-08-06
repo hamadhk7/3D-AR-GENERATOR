@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: 3d-ar-demo
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python scripts/start_web_server.py
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: FLASK_ENV
+        value: production
+      - key: TRIPO_API_KEY
+        sync: false  # Set this in Render dashboard
+      - key: WEB_SERVER_HOST
+        value: 0.0.0.0
+      - key: WEB_SERVER_PORT
+        value: 10000 

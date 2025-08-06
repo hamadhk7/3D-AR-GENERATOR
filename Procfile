@@ -1,0 +1,1 @@
+web: python scripts/start_web_server.py 
